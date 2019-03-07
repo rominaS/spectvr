@@ -19,7 +19,7 @@
 $ curl -X POST 
        -H "Content-Type: `application/json`" 
        -d '{"username:" "dasndu2", "password:" "d128dn12d"}
-       http://localhost:3000/signup/'
+       http://localhost:3000/signup/
 ```
 
 - description: signin to the application
