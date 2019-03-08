@@ -1,0 +1,55 @@
+.complex_form{
+  margin-top:20px;
+  border-radius: 10px;
+  border: 1px dotted #000000;;
+  padding:20px 10px 10px 10px;
+  display:flex;
+  flex-direction: column;
+}
+
+.complex_form .form_title{
+  font-size:25px;
+  font-weight:normal;
+  margin:-20px -10px 20px -10px;
+  padding:10px 0px 10px 25px;
+  background-color: #FFFFFF;
+  border-radius: 7px 7px 0px 0px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  color: #FF17BE;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.complex_form .form_radio{
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.complex_form .form_element{
+  margin-bottom:10px;
+  font-size: 15px;
+  border-radius:10px;
+  padding:5px 10px 5px 10px;
+}
+
+/* This snippet of code was generated using: http://css3buttongenerator.com for our project too/*/ 
+  
+  .btn {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  color: #1a1a1a;
+  font-size: 23px;
+  background: #ffdbff;
+  padding: 3px 11px 4px 11px;
+  border: dotted #0e0f0f 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  }
+
+.btn:hover {
+  background: #e793ed;
+  text-decoration: none;
+}
