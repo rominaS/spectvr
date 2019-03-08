@@ -10,6 +10,7 @@ const MongoClient = require('mongodb').MongoClient;
 const uri = 'mongodb+srv://SpectVRAdmin:password123456@spectvr-ba7ih.mongodb.net/test?retryWrites=true';
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
+let db;
 //Authenication -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 app.use(function (req, res, next){
     console.log("HTTPS request", req.method, req.url, req.body);
@@ -91,9 +92,7 @@ let config = {
 };
 
 const https = require('https');
-const PORT = 3000;
-
-let db;
+const PORT = process.env.PORT || 3000;
 
 client.connect(function(err) {
 	db = client.db("SpectVR");
