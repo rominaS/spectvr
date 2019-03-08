@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+class Login extends Component {
+  render() {
+    return (
+      <form>
+          <input type="text" name="username" placeholder="Enter a username" required/>
+          <input type="password" name="password" placeholder="Enter a password" required/>
+          <button id="signin" name="action">Sign in</button>
+          <button id="signup" name="action">Sign up</button>
+        </form>
+    );
+  }
+}
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      /*<div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
@@ -20,9 +32,9 @@ class App extends Component {
             Learn React
           </a>
         </header>
-      </div>
+      </div>*/
+      <Login />
     );
   }
 }
-
 export default App;
