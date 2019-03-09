@@ -91,7 +91,7 @@ let config = {
     cert: certificate
 };
 
-const https = require('https');
+const http = require('http');
 const PORT = process.env.PORT || 3000;
 
 mongodb.MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client) {
