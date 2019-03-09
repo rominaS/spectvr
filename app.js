@@ -94,7 +94,7 @@ let config = {
 const https = require('https');
 const PORT = process.env.PORT || 3000;
 
-mongodb.MongoClient.connect(uri, function(err, client) {
+mongodb.MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client) {
     if (err) {
         console.log(err);
         process.exit(1);
@@ -102,9 +102,9 @@ mongodb.MongoClient.connect(uri, function(err, client) {
 
 	db = client.db();
     console.log("Database connected");
-    
-	https.createServer(config, app).listen(PORT, function (err) {
+
+	http.createServer(app).listen(PORT, function (err) {
     	if (err) console.log(err);
-    	else console.log("HTTPS server on https://localhost:%s", PORT);
+    	else console.log("HTTP server on https://localhost:%s", PORT);
 	});
 });
