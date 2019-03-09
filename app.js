@@ -9,7 +9,7 @@ const session = require('express-session');
 const MongoClient = require('mongodb').MongoClient;
 const uri = 'mongodb+srv://SpectVRAdmin:password123456@spectvr-ba7ih.mongodb.net/test?retryWrites=true';
 const client = new MongoClient(uri, { useNewUrlParser: true });
-
+app.use(express.static('frontend'));
 let db;
 //Authenication -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 app.use(function (req, res, next){
