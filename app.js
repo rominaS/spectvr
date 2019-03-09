@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 const cookie = require('cookie');
 const session = require('express-session');
 const MongoClient = require('mongodb').MongoClient;
-const uri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb+srv://SpectVRAdmin:password123456@spectvr-ba7ih.mongodb.net/test?retryWrites=true';
+const uri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://<dbuser>:<dbpassword>@ds159926.mlab.com:59926/heroku_rc0df5jw';
 const client = new MongoClient(uri, { useNewUrlParser: true });
 app.use(express.static('frontend'));
 let db;
