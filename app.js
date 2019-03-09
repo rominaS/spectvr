@@ -95,10 +95,9 @@ const https = require('https');
 const PORT = process.env.PORT || 3000;
 
 client.connect(function(err) {
-	db = client.db("SpectVR");
+	db = client.db("heroku_rc0df5jw");
 	https.createServer(config, app).listen(PORT, function (err) {
     	if (err) console.log(err);
     	else console.log("HTTPS server on https://localhost:%s", PORT);
-        db.collection("Users").insertOne( {username: "Charles", password: "Ruan"} );
 	});
 });
