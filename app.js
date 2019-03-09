@@ -6,9 +6,9 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const cookie = require('cookie');
 const session = require('express-session');
-const MongoClient = require('mongodb').MongoClient;
+const mongodb = require('mongodb')
 const uri = process.env.MONGODB_URI || 'mongodb://<dbuser>:<dbpassword>@ds159926.mlab.com:59926/heroku_rc0df5jw';
-const client = new MongoClient(uri, { useNewUrlParser: true });
+
 app.use(express.static('frontend'));
 let db;
 //Authenication -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -94,8 +94,15 @@ let config = {
 const https = require('https');
 const PORT = process.env.PORT || 3000;
 
-client.connect(function(err) {
-	db = client.db("heroku_rc0df5jw");
+mongodb.MongoClient.connect(uri, function(err, client) {
+    if (err) {
+        console.log(err);
+        process.exit(1);
+    }
+
+	db = client.db();
+    console.log("Database connected");
+    
 	https.createServer(config, app).listen(PORT, function (err) {
     	if (err) console.log(err);
     	else console.log("HTTPS server on https://localhost:%s", PORT);
