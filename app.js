@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 const cookie = require('cookie');
 const session = require('express-session');
 const mongodb = require('mongodb')
-const uri = process.env.MONGODB_URI || 'mongodb://<dbuser>:<dbpassword>@ds159926.mlab.com:59926/heroku_rc0df5jw';
+const uri = process.env.MONGODB_URI || 'mongodb://SpectVRAdmin:spectvr1@ds159926.mlab.com:59926/heroku_rc0df5jw';
 
 app.use(express.static('frontend'));
 let db;
