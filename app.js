@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 const cookie = require('cookie');
 const session = require('express-session');
 const MongoClient = require('mongodb').MongoClient;
-const uri = 'mongodb+srv://SpectVRAdmin:password123456@spectvr-ba7ih.mongodb.net/test?retryWrites=true';
+const uri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb+srv://SpectVRAdmin:password123456@spectvr-ba7ih.mongodb.net/test?retryWrites=true';
 const client = new MongoClient(uri, { useNewUrlParser: true });
 app.use(express.static('frontend'));
 let db;
@@ -99,5 +99,6 @@ client.connect(function(err) {
 	https.createServer(config, app).listen(PORT, function (err) {
     	if (err) console.log(err);
     	else console.log("HTTPS server on https://localhost:%s", PORT);
+        db.collection("Users").insertOne( {username: "Charles", password: "Ruan"} );
 	});
 });
