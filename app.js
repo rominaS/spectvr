@@ -9,7 +9,7 @@ const session = require('express-session');
 const mongodb = require('mongodb')
 const uri = process.env.MONGODB_URI || 'mongodb://SpectVRAdmin:spectvr1@ds159926.mlab.com:59926/heroku_rc0df5jw';
 
-app.use(express.static('frontend'));
+app.use(express.static('static'));
 let db;
 //Authenication -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 app.use(function (req, res, next){

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>SpectVR</title>
+        <link rel = "stylesheet" type = "text/css" href = "./style/main.css" />
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+  <div class="row">
+    <form class="col s12" id="sign_up_form">
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Placeholder" id="username" type="text" class="validate">
+          <label for="first_name">Username</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <button type=submit class="waves-effect waves-light btn">Submit <i class="material-icons right">send</i></button>
+    </form>
+  </div>
+        <!-- <div id="like_button_container"></div> -->
+
+        <!-- <libraries -->
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+        <!-- Created Libraries and scripts --> 
+        <script src="./js/backend.js" ></script>
+        <script src="./js/index.js" ></script>
+        <!-- React components -->
+        <!-- <script src="./react-components/like_button.js"></script> -->
+
+    </body>
+</html>
