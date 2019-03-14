@@ -33,7 +33,23 @@ function generateHash (password, salt){
     return hash.digest('base64');
 }
 
-app.post('/signup/', function (req, res, next) {
+const { body, param } = require('express-validator/check');
+const { sanitizeBody, sanitizeParam } = require('express-validator/filter');
+
+const validateBody = [
+  sanitizeBody('*')
+    .trim()
+    .escape()
+];
+
+const validateParam = [
+  sanitizeParam('*')
+    .trim()
+    .escape()
+];
+
+
+app.post('/signup/',validateBody, validateParam,  function (req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
     db.collection("Users").find({username: username}, function(err, user){
@@ -55,7 +71,7 @@ app.post('/signup/', function (req, res, next) {
 });
 
 // curl -H "Content-Type: application/json" -X POST -d '{"username":"alice","password":"alice"}' -c cookie.txt localhost:3000/signin/
-app.post('/signin/', function (req, res, next) {
+app.post('/signin/',validateBody, validateParam,  function (req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
     // retrieve user from the database
