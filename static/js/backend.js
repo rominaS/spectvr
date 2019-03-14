@@ -33,7 +33,7 @@ let backend = (function(){
     }
     
     module.signUp = function(username, password, callback){
-        sendFiles("POST", "/signup/", {username: username, password: password}, function(err, res){
+        send("POST", "/signup/", {username, password}, function(err, res){
              callback(err, res);
         });
     };
