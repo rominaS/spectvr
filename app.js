@@ -53,7 +53,7 @@ app.post('/signup/',validateBody, validateParam,  function (req, res, next) {
     let password = req.body.password;
     let salt = generateSalt();
     let hash = generateHash(password, salt);
-    db.collection("Users").insertOne( {username: username, password: hash, salt: salt} , {upsert: true}, function(err){
+    db.collection("Users").insertOne( {username: username, password: hash, hash:hash, salt: salt} , {upsert: true}, function(err){
         if (err) return res.status(500).end(err);
         // initialize cookie
         res.setHeader('Set-Cookie', cookie.serialize('username', username, {
@@ -69,16 +69,16 @@ app.post('/signin/',validateBody, validateParam,  function (req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
     // retrieve user from the database
-    db.collection("Users").find( {username: username}, function(err, user) {
+    db.collection("Users").findOne( {username: username}, function(err, user) {
         if (err) return res.status(500).end(err);
-        if (!user) return res.status(401).end("access denied");
-        if (user.hash !== generateHash(password, user.salt)) return res.status(401).end("access denied"); 
-        req.session.username = username;
+        if (!user) return res.status(401).end("access denied null");
+        if (user.password !== generateHash(password, user.salt)) return res.status(401).end("access denied wrong pass"); 
+        //req.session.username = username;
         // initialize cookie
-        res.setHeader('Set-Cookie', cookie.serialize('username', username, {
-              path : '/', 
-              maxAge: 60 * 60 * 24 * 7
-        }));
+       // res.setHeader('Set-Cookie', cookie.serialize('username', username, {
+         //     path : '/', 
+         //     maxAge: 60 * 60 * 24 * 7
+        //}));
         return res.json("user " + username + " signed in");
     });
 });
