@@ -41,7 +41,7 @@ let upload = (function(){
         }
       };
       xhr.send();
-    }
+    };
     /*
      Function called when file input updated. If there is a file selected, then
      start upload procedure by asking for a signed request from the app.
