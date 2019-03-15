@@ -51,7 +51,6 @@ const validateParam = [
 app.post('/signup/',validateBody, validateParam,  function (req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
-    if (err) return res.status(500).end(err);
     let salt = generateSalt();
     let hash = generateHash(password, salt);
     db.collection("Users").insertOne( {username: username, password: hash, salt: salt} , {upsert: true}, function(err){
