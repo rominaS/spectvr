@@ -16,30 +16,60 @@
     />
 
     <!--Let browser know website is optimized for mobile-->
-    <!---- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
     <p id="error_box"></p>
 
     <div class="topnav">
-      <a href="/index.html">Upcoming Concerts</a>
-      <a href="/about.html">How does this work</a>
-      <a href="/login.html" style="float:right">Sign In / Sign Up</a>
+      <a href="#">Upcoming Concerts</a>
+      <a href="#">How does this work</a>
+      <a href="#" style="float:right">My Concerts</a>
+      <a href="#" style="float:right">Cart</a>
     </div>
 
-    <h2>My Concerts</h2>
-    <ul id="listMyConcerts">
-      <li href="link to concert page">
-        Concert Name 1
-        <img src="" />
-      </li>
-      <li href="link to concert page">
-        Concert Name 2
-      </li>
-    </ul>
-
-    <div>
-      <h2>How does this work?</h2>
+    <div class="row">
+      <form class="col s12" id="sign_up_form">
+        <div class="row">
+          <div class="input-field col s6">
+            <input
+              placeholder="Placeholder"
+              id="username"
+              type="text"
+              class="validate"
+            />
+            <label for="first_name">Username</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="password" type="password" class="validate" />
+            <label for="password">Password</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="email" type="email" class="validate" />
+            <label for="email">Email</label>
+          </div>
+        </div>
+        <button
+          type="submit"
+          id="signin"
+          name="action"
+          class="waves-effect waves-light btn"
+        >
+          Sign in
+        </button>
+        <button
+          type="submit"
+          id="signup"
+          name="action"
+          class="waves-effect waves-light btn"
+        >
+          Sign up
+        </button>
+      </form>
     </div>
     <!-- <div id="like_button_container"></div> -->
 

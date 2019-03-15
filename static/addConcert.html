@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SpectVR - Add Concert</title>
+    <meta charset="utf-8" />
+    <link href="./style/main.css" rel="stylesheet" type="text/css" />
+    <link href="./style/form.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="topnav">
+      <a href="/index.html">Upcoming Concerts</a>
+      <a href="/about.html">How does this work</a>
+      <a href="/login.html" style="float:right">Sign In / Sign Up</a>
+    </div>
+
+    <h1>Add new concert</h1>
+    <form class="complex_form">
+      <input
+        type="text"
+        name="concertName"
+        class="form_element"
+        placeholder="Enter the concert's name"
+        required
+      />
+
+      <input
+        type="text"
+        name="artistName"
+        class="form_element"
+        placeholder="Enter the artist's name"
+        required
+      />
+
+      <input
+        type="date"
+        name="concertDate"
+        class="form_element"
+        placeholder="Enter the date"
+        required
+      />
+
+      <input
+        type="file"
+        name="concertImage"
+        class="form_element"
+        placeholder="select concert's image"
+      />
+      <input type="submit" id="addNewConcert" />
+    </form>
+
+    <div class="footer">
+      <a href="/credits.html">Credits</a>
+      <a href="/index.html">Home</a>
+    </div>
+  </body>
+</html>
