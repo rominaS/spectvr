@@ -8,6 +8,9 @@ const cookie = require('cookie');
 const session = require('express-session');
 const mongodb = require('mongodb')
 const uri = process.env.MONGODB_URI || 'mongodb://SpectVRAdmin:spectvr1@ds159926.mlab.com:59926/heroku_rc0df5jw';
+const aws = require('aws-sdk');
+aws.config.region = 'us-east-2';
+const S3_BUCKET = process.env.S3_BUCKET;
 
 app.use(express.static('static'));
 let db;
@@ -115,6 +118,6 @@ mongodb.MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client
 
 	http.createServer(app).listen(PORT, function (err) {
     	if (err) console.log(err);
-    	else console.log("HTTPS server on https://localhost:%s", PORT);
+    	else console.log("HTTPS server started on port", PORT);
 	});
 });
