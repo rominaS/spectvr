@@ -14,11 +14,20 @@ const S3_BUCKET = process.env.S3_BUCKET;
 
 app.use(express.static('static'));
 let db;
+
 //Authenication -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+app.use(session({
+    secret: 'rapier',
+    resave: false,
+    saveUninitialized: true,
+}));
+
 app.use(function (req, res, next){
     console.log("HTTPS request", req.method, req.url, req.body);
+    req.username = ('username' in req.session)? req.session.username : null;
     next();
 });
+
 
 let isAuthenticated = function(req, res, next) {
     if (!req.username) return res.status(401).end("access denied");
@@ -50,13 +59,12 @@ const validateParam = [
     .escape()
 ];
 
-
 app.post('/signup/',validateBody, validateParam,  function (req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
     let salt = generateSalt();
     let hash = generateHash(password, salt);
-    db.collection("Users").insertOne( {username: username, password: hash, hash:hash, salt: salt} , {upsert: true}, function(err){
+    db.collection("Users").insertOne( {username: username, password: hash, salt: salt} , {upsert: true}, function(err){
         if (err) return res.status(500).end(err);
         // initialize cookie
         res.setHeader('Set-Cookie', cookie.serialize('username', username, {
@@ -76,12 +84,12 @@ app.post('/signin/',validateBody, validateParam,  function (req, res, next) {
         if (err) return res.status(500).end(err);
         if (!user) return res.status(401).end("access denied null");
         if (user.password !== generateHash(password, user.salt)) return res.status(401).end("access denied wrong pass"); 
-        //req.session.username = username;
+        req.session.username = username;
         // initialize cookie
-       // res.setHeader('Set-Cookie', cookie.serialize('username', username, {
-         //     path : '/', 
-         //     maxAge: 60 * 60 * 24 * 7
-        //}));
+        res.setHeader('Set-Cookie', cookie.serialize('username', username, {
+            path : '/', 
+            maxAge: 60 * 60 * 24 * 7
+        }));
         return res.json("user " + username + " signed in");
     });
 });
