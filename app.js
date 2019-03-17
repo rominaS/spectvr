@@ -10,6 +10,9 @@ const mongodb = require('mongodb')
 const uri = process.env.MONGODB_URI || 'mongodb://SpectVRAdmin:spectvr1@ds159926.mlab.com:59926/heroku_rc0df5jw';
 const aws = require('aws-sdk');
 aws.config.region = 'us-east-2';
+app.set('views', './static');
+app.engine('html', require('ejs').renderFile);
+app.listen(process.env.PORT || 3001);
 const S3_BUCKET = process.env.S3_BUCKET;
 
 app.use(express.static('static'));
@@ -58,6 +61,35 @@ const validateParam = [
     .trim()
     .escape()
 ];
+app.get('/upload', (req, res) => res.render('upload.html'));
+app.get('/sign-s3', (req, res) => {
+  const s3 = new aws.S3();
+  const fileName = req.query['file-name'];
+  const fileType = req.query['file-type'];
+  const s3Params = {
+    Bucket: S3_BUCKET,
+    Key: fileName,
+    Expires: 60,
+    ContentType: fileType,
+    ACL: 'public-read'
+  };
+
+  s3.getSignedUrl('putObject', s3Params, (err, data) => {
+    if(err){
+      console.log(err);
+      return res.end();
+    }
+    const returnData = {
+      signedRequest: data,
+      url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+    };
+    res.write(JSON.stringify(returnData));
+    res.end();
+  });
+});
+app.post('/save-details', (req, res) => {
+  // TODO: Read POSTed for mand save it to the database
+});
 
 app.post('/signup/',validateBody, validateParam,  function (req, res, next) {
     let username = req.body.username;
