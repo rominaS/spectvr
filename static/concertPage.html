@@ -4,9 +4,11 @@
     <title>SpectVR</title>
     <meta charset="utf-8" />
     <link href="./style/main.css" rel="stylesheet" type="text/css" />
-    <link href="./form/main.css" rel="stylesheet" type="text/css" />
+    <link href="./style/store.css" rel="stylesheet" type="text/css" />
+
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./js/buyconcert.js" async></script>
   </head>
   <body>
     <div class="topnav">
@@ -16,39 +18,88 @@
         href="/login.html"
         style="float:right"
         id="signin_btn"
-        class="btn head_btn hidden"
+        class="btn head_btn "
         >Sign In / Sign Up</a
       >
       <a
         href="/signout/"
         style="float: right"
         id="signout_btn"
-        class="btn head_btn hidden"
+        class="btn head_btn "
         >Sign out</a
       >
     </div>
 
-    <div class="row">
-      <div class="column left">
-        <h2 name="concertName">Concert Name</h2>
-        <img
-          src="https://i.ytimg.com/vi/VCzs9md9GdY/hqdefault.jpg"
-          alt="Concert Img"
-        />
+    <section class="container content-section">
+      <div class="shop-items">
+        <div class="shop-item">
+          <span class="shop-item-title" name="concertName"
+            >SHINee World VI</span
+          >
+          <img
+            class="shop-item-image"
+            alt="concert-img"
+            src="http://theseoulstory.com/wp-content/uploads/2016/10/14650122_1307781205908212_3590621079867843424_n.png"
+          />
+          <div class="shop-item-details">
+            <span class="" name="artistName">SHINee </span>
+            <span class="" name="concertDate"> September 13th 2019</span>
+            <span class="" name="concertTime">7:00 PM KST</span>
+            <span class="shop-item-price">$50.00 </span>
+            <button
+              class="btn btn-primary shop-item-button"
+              type="button"
+              id="buyConcert"
+            >
+              Buy VR Concert Ticket
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div class="column right">
-        <form class="complex_form">
-          <h2 class="form_element" name="concertName">SHINee World VI</h2>
-          <h3 class="form_element" name="artistName">SHINee</h3>
-          <h3 class="form_element" name="concertDate">September 13th 2019</h3>
-          <h3 class="form_element" name="concertTime">7:00 PM KST</h3>
-          <button class="btn" type="submit" id="buyConcert">
-            Buy VR Concert Ticket
-          </button>
-        </form>
+      <div class="shop-items">
+        <div class="shop-item">
+          <span class="shop-item-title" name="concertName"
+            >INSPRIED Toronto</span
+          >
+          <img
+            class="shop-item-image"
+            alt="concert-img"
+            src="https://i0.wp.com/shineeusa.net/wp-content/uploads/2017/11/171115_TicketingImage3.jpg?fit=700%2C992&ssl=1"
+          />
+          <div class="shop-item-details">
+            <span class="" name="artistName">Jonghyun </span>
+            <span class="" name="concertDate"> Dec 9th 2019</span>
+            <span class="" name="concertTime">6:00 PM KST</span>
+            <span class="shop-item-price">$45.00 </span>
+            <button
+              class="btn btn-primary shop-item-button"
+              type="button"
+              id="buyConcert"
+            >
+              Buy VR Concert Ticket
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <section class="container content-section">
+      <h2 class="section-header">CART</h2>
+      <div class="cart-row">
+        <span class="cart-item cart-header cart-column">ITEM</span>
+        <span class="cart-price cart-header cart-column">PRICE</span>
+        <!-- <span class="cart-quantity cart-header cart-column">QUANTITY</span> -->
+      </div>
+      <div class="cart-items"></div>
+      <div class="cart-total">
+        <strong class="cart-total-title">Total</strong>
+        <span class="cart-total-price">$0</span>
+      </div>
+      <button class="btn btn-primary btn-purchase" type="button">
+        PURCHASE
+      </button>
+    </section>
 
     <div class="footer">
       <a href="/credits.html">Credits</a>
