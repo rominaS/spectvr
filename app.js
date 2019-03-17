@@ -10,9 +10,9 @@ const mongodb = require('mongodb')
 const uri = process.env.MONGODB_URI || 'mongodb://SpectVRAdmin:spectvr1@ds159926.mlab.com:59926/heroku_rc0df5jw';
 const aws = require('aws-sdk');
 aws.config.region = 'us-east-2';
-app.set('views', './static');
-app.engine('html', require('ejs').renderFile);
-app.listen(process.env.PORT || 3001);
+//app.set('views', './static');
+//app.engine('html', require('ejs').renderFile);
+//app.listen(process.env.PORT || 3001);
 const S3_BUCKET = process.env.S3_BUCKET;
 
 app.use(express.static('static'));
@@ -61,7 +61,7 @@ const validateParam = [
     .trim()
     .escape()
 ];
-app.get('/upload', (req, res) => res.render('upload.html'));
+/*app.get('/upload', (req, res) => res.render('upload.html'));
 app.get('/sign-s3', (req, res) => {
   const s3 = new aws.S3();
   const fileName = req.query['file-name'];
@@ -90,7 +90,7 @@ app.get('/sign-s3', (req, res) => {
 app.post('/save-details', (req, res) => {
   // TODO: Read POSTed for mand save it to the database
 });
-
+*/
 app.post('/signup/',validateBody, validateParam,  function (req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
