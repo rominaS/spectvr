@@ -38,6 +38,11 @@
       submit();
     });
 
+    document.querySelector("#signout").addEventListener("click", function(e) {
+      document.querySelector("form [name=action]").value = "signout";
+      submit();
+    });
+
     document.querySelector("form").addEventListener("submit", function(e) {
       e.preventDefault();
     });
