@@ -64,7 +64,7 @@ app.post('/signup/',validateBody, validateParam,  function (req, res, next) {
     let password = req.body.password;
     let salt = generateSalt();
     let hash = generateHash(password, salt);
-    db.collection("Users").insertOne( {username: username, password: hash, salt: salt} , {upsert: true}, function(err){
+    db.collection("Users").insertOne( {username: username, password: hash, salt: salt, purchases: {}} , {upsert: true}, function(err){
         if (err) return res.status(500).end(err);
         // initialize cookie
         res.setHeader('Set-Cookie', cookie.serialize('username', username, {
@@ -102,6 +102,16 @@ app.get('/signout/', function (req, res, next) {
           maxAge: 60 * 60 * 24 * 7 // 1 week in number of seconds
     }));
     return res.json("user has signed out");
+});
+
+
+//Purchasing Content ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+app.post('/purchase/:_id', validateBody, validateParam, isAuthenticated, function (req, res, next) {
+    db.collection("Users").updateOne( {username: req.session.username }, { $push: { "purchases": req.params._id}} function(err, user) {
+            if (err) return res.status(500).end(err);
+            return res.json(user);
+    })
 });
 
 //Server Management -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
