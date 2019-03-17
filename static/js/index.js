@@ -12,13 +12,13 @@
   });
 
   api.onUserUpdate(function(username) {
-    document.querySelector("#signin_button").style.visibility = username
-      ? "hidden"
-      : "visible";
-    document.querySelector("#signout_button").style.visibility = username
-      ? "visible"
-      : "hidden";
-    //document.querySelector('#create_message_form').style.visibility = (username)? 'visible' : 'hidden';
+    document.querySelector("#signin_button").style.visibility = username;
+    //   ? "hidden"
+    //   : "visible";
+    // document.querySelector("#signout_button").style.visibility = username
+    //   ? "visible"
+    //   : "hidden";
+    // //document.querySelector('#create_message_form').style.visibility = (username)? 'visible' : 'hidden';
   });
 
   window.addEventListener("load", function() {
