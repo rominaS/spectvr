@@ -108,10 +108,10 @@ app.get('/signout/', function (req, res, next) {
 //Purchasing Content ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 app.post('/purchase/:_id', validateBody, validateParam, isAuthenticated, function (req, res, next) {
-    db.collection("Users").updateOne( {username: req.session.username }, { $push: { "purchases": req.params._id}} function(err, user) {
+    db.collection("Users").updateOne( {username: req.session.username }, { $push: { "purchases": req.params._id } },  function(err, user) {
             if (err) return res.status(500).end(err);
             return res.json(user);
-    })
+    });
 });
 
 //Server Management -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
