@@ -44,9 +44,21 @@ header #title {
   text-transform: uppercase;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 footer {
   margin-top: 20px;
   text-align: center;
+}
+
+#error_box {
+  color: red;
+  visibility: hidden;
+}
+#error_box::before {
+  content: "Error: ";
 }
 
 ul {
