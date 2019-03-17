@@ -23,27 +23,30 @@
 
         <!-- <libraries -->
         <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script><script src="//path/to/video.min.js"></script>
-<script src="//path/to/videojs-vr.min.js"></script>
-<script>
-  var player = videojs('my-video');
-
-  player.vr();
-</script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<!--<script src="//path/to/video.min.js"></script> -->
+<!-- <script src="//path/to/videojs-vr.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 
         <!-- Created Libraries and scripts --> 
         <script src="./js/backend.js" ></script>
         <script src="./js/index.js" ></script>
+        <script src="../bundle.js" ></script>
+<!--<script>
+   type="text/javascript"
+   src="https://combinatronics.com/videojs/video.js"
+</script>
+<script>
+   type="text/javascript"
+   src="https://combinatronics.com/videojs/videojs-vr/*"
+</script>
 <script>
     (function(){
-        var player = videojs( '#video-container', {
-            techOrder: ['html5']
-        });
+        var player = videojs( 'video-container');
         player.vr({projection: "360"});
     })();
-</script>
+</script> -->
         <!-- React components -->
         <!-- <script src="./react-components/like_button.js"></script> -->
 
