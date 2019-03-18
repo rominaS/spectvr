@@ -5,6 +5,8 @@ var videojs = require('video.js');
 // to a variable.
 require('videojs-vr');
 
-var player = videojs('my-video');
+var player = videojs('my-video', {
+            techOrder: ['html5']
+        });
 
 player.vr({projection: '360'});
