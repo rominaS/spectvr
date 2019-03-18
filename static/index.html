@@ -5,7 +5,7 @@
     <title>SpectVR</title>
     <link rel="stylesheet" type="text/css" href="./style/store.css" />
     <link rel="stylesheet" type="text/css" href="./style/main.css" />
-    <!--Import Google Icon Font-->
+    <!-- Import Google Icon Font-->
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -17,7 +17,24 @@
     />
 
     <!--Let browser know website is optimized for mobile-->
-    <!---- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <img src="media/spectvrlogo.png" alt="logo" />
+
+    <!-- <nav>
+      <ul>
+        <li><a href="/index.html">Upcoming Concerts</a></li>
+        <li><a href="/about.html">How does this work</a></li>
+        <li>
+          <a href="/login.html" id="signin_btn" style="float:right"
+            >Sign In / Sign Up</a
+          >
+        </li>
+        <li>
+          <a href="/signout/" id="signout_btn" style="float:right">Sign Out</a>
+        </li>
+      </ul>
+    </nav> -->
   </head>
   <body>
     <p id="error_box"></p>
@@ -57,13 +74,9 @@
             <span class="" name="artistName">SHINee </span>
             <span class="" name="concertDate"> September 13th 2019</span>
             <span class="" name="concertTime">7:00 PM KST</span>
-            <button
-              class="btn btn-primary shop-item-button"
-              type="button"
-              id="buyConcert"
-            >
-              Ticket
-            </button>
+            <a href="/concertPage.html" id="buyConcert">
+              Buy Ticket
+            </a>
           </div>
         </div>
       </div>
@@ -82,20 +95,16 @@
             <span class="" name="artistName">Jonghyun </span>
             <span class="" name="concertDate"> Dec 9th 2019</span>
             <span class="" name="concertTime">6:00 PM KST</span>
-            <button
-              class="btn btn-primary shop-item-button"
-              type="button"
-              id="buyConcert"
-            >
-              Ticket
-            </button>
+            <a href="/concertPage.html" id="buyConcert">
+              Buy Ticket
+            </a>
           </div>
         </div>
       </div>
     </section>
 
     <div>
-      <a href="about.html">How does this work?</a>
+      <a href="/about.html">How does this work?</a>
     </div>
     <!-- <div id="like_button_container"></div> -->
 
