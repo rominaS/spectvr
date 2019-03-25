@@ -46,9 +46,9 @@ const upload = multer({
 
 
 const router = express.Router();
-const upload = require('../services/multer');
+const uploadS = upload;
 
-const singleUpload = upload.single('image')
+const singleUpload = uploadS.single('image')
 
 router.post('/image-upload', function(req, res) {
   singleUpload(req, res, function(err, some) {
