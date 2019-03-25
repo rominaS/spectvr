@@ -8,11 +8,58 @@ const cookie = require('cookie');
 const session = require('express-session');
 const mongodb = require('mongodb')
 const uri = process.env.MONGODB_URI || 'mongodb://SpectVRAdmin:spectvr1@ds159926.mlab.com:59926/heroku_rc0df5jw';
+//const aws = require('aws-sdk');
+//aws.config.region = 'us-east-2';
+//app.set('views', './static');
+//app.engine('html', require('ejs').renderFile);
+//const S3_BUCKET = process.env.S3_BUCKET;
+const multer = require('multer');
+const multerS3 = require('multer-s3');
 const aws = require('aws-sdk');
-aws.config.region = 'us-east-2';
-app.set('views', './static');
-app.engine('html', require('ejs').renderFile);
-const S3_BUCKET = process.env.S3_BUCKET;
+
+aws.config.update({
+    // Your SECRET ACCESS KEY from AWS should go here,
+    // Never share it!
+    // Setup Env Variable, e.g: process.env.SECRET_ACCESS_KEY
+    secretAccessKey: "ab7786ad6",
+    // Not working key, Your ACCESS KEY ID from AWS should go here,
+    // Never share it!
+    // Setup Env Variable, e.g: process.env.ACCESS_KEY_ID
+    accessKeyId: "ab7786ad6",
+    region: 'us-east-1' // region of your bucket
+});
+
+const s3 = new aws.S3();
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'medium-test',
+    acl: 'public-read',
+    metadata: function (req, file, cb) {
+      cb(null, {fieldName: file.fieldname});
+    },
+    key: function (req, file, cb) {
+      cb(null, Date.now().toString())
+    }
+  })
+})
+
+
+const router = express.Router();
+const upload = require('../services/multer');
+
+const singleUpload = upload.single('image')
+
+router.post('/image-upload', function(req, res) {
+  singleUpload(req, res, function(err, some) {
+    if (err) {
+      return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
+    }
+
+    return res.json({'imageUrl': req.file.location});
+  });
+})
+
 
 app.use(express.static('static'));
 let db;
@@ -60,35 +107,6 @@ const validateParam = [
     .trim()
     .escape()
 ];
-app.get('/upload', (req, res) => res.render('upload.html'));
-app.get('/sign-s3', (req, res) => {
-  const s3 = new aws.S3();
-  const fileName = req.query['file-name'];
-  const fileType = req.query['file-type'];
-  const s3Params = {
-    Bucket: S3_BUCKET,
-    Key: fileName,
-    Expires: 60,
-    ContentType: fileType,
-    ACL: 'public-read'
-  };
-
-  s3.getSignedUrl('putObject', s3Params, (err, data) => {
-    if(err){
-      console.log(err);
-      return res.end();
-    }
-    const returnData = {
-      signedRequest: data,
-      url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
-    };
-    res.write(JSON.stringify(returnData));
-    res.end();
-  });
-});
-app.post('/save-details', (req, res) => {
-  // TODO: Read POSTed for mand save it to the database
-});
 
 app.post('/signup/',validateBody, validateParam,  function (req, res, next) {
     let username = req.body.username;

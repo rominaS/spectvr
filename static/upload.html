@@ -13,15 +13,10 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-<input type="file" id="file-input">
-<p id="status">Please select a file</p>
-<img id="preview" src="/images/default.png">
 
-<form method="POST" action="/save-details">
-  <input type="hidden" id="avatar-url" name="avatar-url" value="/images/default.png">
-  <input type="text" name="username" placeholder="Username"><br>
-  <input type="text" name="full-name" placeholder="Full name"><br><br>
-  <input type="submit" value="Update profile">
+<form method="POST" action="/image-upload" enctype="multipart/form-data">
+   <input type="file" class="form_element" name="file" accept="image/*"/>
+  <input type="submit" value="Upload">
 </form>
 
 <script>
@@ -58,7 +53,7 @@ function uploadFile(file, signedRequest, url){
   xhr.send(file);
 }
 
-(() => {
+/*(() => {
   document.getElementById("file-input").onchange = () => {
     const files = document.getElementById('file-input').files;
     const file = files[0];
@@ -67,7 +62,7 @@ function uploadFile(file, signedRequest, url){
     }
     getSignedRequest(file);
   };
-})();
+})();*/
 
 </script>
         <!-- <div id="like_button_container"></div> -->
