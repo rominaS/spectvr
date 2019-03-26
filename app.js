@@ -26,10 +26,11 @@ aws.config.update({
 });
 
 const s3 = new aws.S3();
-const upload = multer({
+let upload = multer({
   storage: multerS3({
     s3: s3,
     bucket: 'spectvr',
+    contentType: multerS3.AUTO_CONTENT_TYPE,
     acl: 'public-read',
     metadata: function (req, file, cb) {
       cb(null, {fieldName: file.fieldname});
@@ -40,22 +41,15 @@ const upload = multer({
   })
 })
 
-const router = express.Router();
-const singleUpload = upload.single('image')
-
-router.post('/image-upload', function(req, res) {
-  singleUpload(req, res, function(err, some) {
-    if (err) {
-      return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
-    }
-
-    return res.json({'imageUrl': req.file.location});
-  });
-})
-module.exports = router;
-
 app.use(express.static('static'));
 let db;
+
+
+//Video upload -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+app.post('/image-upload', upload.single("file"), function(req, res) {
+    res.send('Successfully uploaded file!');
+});
 
 //Authenication -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 app.use(session({
