@@ -8,11 +8,7 @@ const cookie = require('cookie');
 const session = require('express-session');
 const mongodb = require('mongodb')
 const uri = process.env.MONGODB_URI || 'mongodb://SpectVRAdmin:spectvr1@ds159926.mlab.com:59926/heroku_rc0df5jw';
-//const aws = require('aws-sdk');
-//aws.config.region = 'us-east-2';
-//app.set('views', './static');
-//app.engine('html', require('ejs').renderFile);
-//const S3_BUCKET = process.env.S3_BUCKET;
+
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const aws = require('aws-sdk');
@@ -33,7 +29,7 @@ const s3 = new aws.S3();
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'medium-test',
+    bucket: 'spectvr',
     acl: 'public-read',
     metadata: function (req, file, cb) {
       cb(null, {fieldName: file.fieldname});
@@ -47,7 +43,7 @@ const upload = multer({
 
 const router = express.Router();
 const uploadS = upload;
-
+const upload = require('../services/multer');
 const singleUpload = uploadS.single('image')
 
 router.post('/image-upload', function(req, res) {
