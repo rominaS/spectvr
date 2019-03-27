@@ -17,11 +17,11 @@ aws.config.update({
     // Your SECRET ACCESS KEY from AWS should go here,
     // Never share it!
     // Setup Env Variable, e.g: process.env.SECRET_ACCESS_KEY
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "DAAuGfpHWAgPv9edV+hyfVIp4/i8XnvRKT8HAybu",
     // Not working key, Your ACCESS KEY ID from AWS should go here,
     // Never share it!
     // Setup Env Variable, e.g: process.env.ACCESS_KEY_ID
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || "AKIAJ47FKQAVP6RR6E3Q",
     region: 'us-east-2' // region of your bucket
 });
 
@@ -137,7 +137,10 @@ app.get('/signout/', function (req, res, next) {
 //Video management -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 app.post('/image-upload/', upload.single("file"), function(req, res) {
-    res.send('Successfully uploaded file!');
+    db.collection("Videos").insertOne( {key : req.file.key, url: req.file.location, mimetype: req.file.mimetype }, {upsert: true}, function(err){
+        if (err) return res.status(500).end(err);
+        res.send('Successfully uploaded file!');      
+    });
 });
 
 app.get('/videos/:id', function (req, res, next) {
@@ -149,8 +152,8 @@ app.get('/videos/:id', function (req, res, next) {
 
 app.post('/purchase/:_id', validateBody, validateParam, isAuthenticated, function (req, res, next) {
     db.collection("Users").updateOne( {username: req.session.username }, { $push: { "purchases": req.params._id } },  function(err, user) {
-            if (err) return res.status(500).end(err);
-            return res.json(user);
+        if (err) return res.status(500).end(err);
+        return res.json(user);
     });
 });
 
