@@ -16,17 +16,25 @@
 <div class="row">
 <form class="col s12" method="POST" action="/image-upload" enctype="multipart/form-data">
         <div class="row">
-          <div class="input-field col s12">
+          <div class="input-field col s6">
             <input id="title" type="text" class="validate" required />
             <label for="title">Title</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="artist" type="text" class="validate" required />
+            <label for="artist">Artist</label>
           </div>
         </div>
   <div class="row">
     <form class="col s12">
       <div class="row">
-        <div class="input-field col s12">
-          <textarea id="description" class="materialize-textarea"></textarea>
-          <label for="description">Description</label>
+        <div class="col s12">
+          $
+          <div class="input-field inline">
+              <input id="price" type="number" class="validate" required>
+          <label for="price">Price</label>
+            <span class="helper-text" data-error="Not at number" data-success="All good">Choose a price</span>
+        </div>
         </div>
       </div>
     </form>
@@ -51,7 +59,20 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="description" class="materialize-textarea"></textarea>
+          <label for="description">Description</label>
+        </div>
+      </div>
+    </form>
+  </div>
+Thumbnail
    <input type="file" class="form_element" name="file" accept="image/*"/>
+Video
+   <input type="file" class="form_element" name="file" accept="video/*"/>
           </div>
         </div>
         <button
