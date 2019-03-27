@@ -13,13 +13,64 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-
-<form method="POST" action="/image-upload" enctype="multipart/form-data">
+<div class="row">
+<form class="col s12" method="POST" action="/image-upload" enctype="multipart/form-data">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="title" type="text" class="validate" required />
+            <label for="title">Title</label>
+          </div>
+        </div>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="description" class="materialize-textarea"></textarea>
+          <label for="description">Description</label>
+        </div>
+      </div>
+    </form>
+  </div>
+        <div class="row">
+          <div class="input-field col s6">
+              <input id="from" type="text" class="datepicker" required>
+            <label for="from">Available from</label>
+          </div>
+          <div class="input-field col s6">
+             <input id="fromTime" type="text" class="timepicker" required>
+            <label for="fromTime">at</label>
+          </div>
+          <div class="input-field col s6">
+              <input id="to" type="text" class="datepicker" required>
+            <label for="to">Available to</label>
+          </div>
+          <div class="input-field col s6">
+             <input id="toTime" type="text" class="timepicker" required>
+            <label for="toTime">at</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
    <input type="file" class="form_element" name="file" accept="image/*"/>
-  <input type="submit" value="Upload">
+          </div>
+        </div>
+        <button
+          type="submit"
+          id="upload"
+          name="action"
+          class="waves-effect waves-light btn"
+        >
+          Upload
+        </button>
 </form>
 
 <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.datepicker');
+    var instances = M.Datepicker.init(elems, {autoClose:true});
+    elems = document.querySelectorAll('.timepicker');
+    instances = M.Timepicker.init(elems, {autoClose:true});
+  });
 function getSignedRequest(file){
   const xhr = new XMLHttpRequest();
   xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
