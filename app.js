@@ -157,9 +157,10 @@ app.get("/signout/", function(req, res, next) {
 
 //Video management -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-app.post("/image-upload/", upload.single("file"), function(req, res) {
+app.post("/image-upload/", upload.array("file", 2), function(req, res) {
   db.collection("Videos").insertOne(
-    { key: req.file.key, url: req.file.location, mimetype: req.file.mimetype },
+    { keyVideo: req.files[1].key, urlVideo: req.files[1].location, mimetypeVideo: req.files[1].mimetype,
+    keyThumbnail: req.files[0].key, urlThumbnail: req.files[0].location, mimetypeThumbnail: req.files[0].mimetype },
     { upsert: true },
     function(err) {
       if (err) return res.status(500).end(err);
