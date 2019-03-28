@@ -13,7 +13,6 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-<div class="row">
 <form class="col s12" method="POST" action="/image-upload" enctype="multipart/form-data">
         <div class="row">
           <div class="input-field col s6">
@@ -26,7 +25,7 @@
           </div>
         </div>
   <div class="row">
-    <form class="col s12">
+    <div class="col s12">
       <div class="row">
         <div class="col s12">
           $
@@ -37,7 +36,7 @@
         </div>
         </div>
       </div>
-    </form>
+    </div>
   </div>
         <div class="row">
           <div class="input-field col s6">
@@ -60,19 +59,19 @@
         <div class="row">
           <div class="input-field col s12">
   <div class="row">
-    <form class="col s12">
+    <div class="col s12">
       <div class="row">
         <div class="input-field col s12">
           <textarea id="description" class="materialize-textarea"></textarea>
           <label for="description">Description</label>
         </div>
       </div>
-    </form>
+    </div>
   </div>
 Thumbnail
-   <input type="file" class="form_element" name="file" accept="image/*"/>
+   <input type="file" class="form_element" name="file"/> <!-- accept="image/*"/> -->
 Video
-   <input type="file" class="form_element" name="file" accept="video/*"/>
+   <input type="file" class="form_element" name="file"/> <!-- accept="video/*"/>-->
           </div>
         </div>
         <button
@@ -83,6 +82,7 @@ Video
         >
           Upload
         </button>
+<!-- <input type=submit />-->
 </form>
 
 <script>
