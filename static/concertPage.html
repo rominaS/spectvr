@@ -46,6 +46,18 @@
             <span class="" name="concertDate"> September 13th 2019</span>
             <span class="" name="concertTime">7:00 PM KST</span>
             <span class="shop-item-price">$50.00 </span>
+            <form action="/charge" method="POST">
+              <script
+                src="https://checkout.stripe.com/checkout.js"
+                class="stripe-button"
+                data-key="{{ pk_test_DkVbtkiYZlw3Pycj7dkwC4hM00UZQijvA9 }}"
+                data-amount="5000"
+                data-name="concert ticket"
+                data-description="VR Concert ticket"
+                data-image="/media/spectvrlogo.png"
+                data-locale="auto"
+              ></script>
+            </form>
             <button
               class="btn btn-primary shop-item-button"
               type="button"
@@ -72,6 +84,20 @@
             <span class="" name="concertDate"> Dec 9th 2019</span>
             <span class="" name="concertTime">6:00 PM KST</span>
             <span class="shop-item-price">$45.00 </span>
+
+            <form action="/purchase" method="POST">
+              <script
+                src="https://checkout.stripe.com/checkout.js"
+                class="stripe-button"
+                data-key="{{ pk_test_DkVbtkiYZlw3Pycj7dkwC4hM00UZQijvA9 }}"
+                data-amount="4500"
+                data-name="concert ticket"
+                data-description="VR Concert ticket"
+                data-image="/media/spectvrlogo.png"
+                data-locale="auto"
+              ></script>
+            </form>
+
             <button
               class="btn btn-primary shop-item-button"
               type="button"
