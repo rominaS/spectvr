@@ -170,7 +170,10 @@ app.post("/image-upload/", upload.array("file", 2), function(req, res) {
 });
 
 app.get("/videos/:id", function(req, res, next) {
-  return res.json(s3.getObjects);
+    let params = { Bucket: "spectvr", Key: req.params.id};
+    s3.getObject(params, function (err, video) {
+        res.send(video);
+    });
 });
 
 //Purchasing Content ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
