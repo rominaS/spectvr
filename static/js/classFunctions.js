@@ -1,6 +1,8 @@
-let backend = (function(){
+let class = (function(){
     "use strict";
-    
+    // this file is full of useful class functions copied exactly from the lecture examples. 
+    // They've been put into this files as this is not originally written code, so it should
+    // be treated as it's own separate library
     let module = {};
     
     function sendFiles(method, url, data, callback){
@@ -32,29 +34,10 @@ let backend = (function(){
         }
     }
     
-    module.signUp = function(username, password, callback){
-        send("POST", "/signup/", {username, password}, function(err, res){
-             callback(err, res);
-        });
-    };
+    module.send = send;
+
+    module.sendFiles = sendFiles;
     
-
-    /*let getUsers = function(callback){
-        send("GET", "/api/users/", null, callback);
-    };*/
-    
-    module.getVideo(id, callback){
-       send("GET", "/videos/"+id, null, callback);
-    }
-
-    module.getVideos(callback){
-       send("GET", "/allVideos/", null, callback);
-    }
-
-
-    module.getCurrentVideos(callback){
-       send("GET", "/paidVideos/", null, callback);
-    }
     
     return module;
 }());
