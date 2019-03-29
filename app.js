@@ -184,7 +184,7 @@ app.get("/allVideos/:page/:limit", function(req, res, next) {
     // the amount of items determined by what page you're on
 });
 
-app.get("/apaidVideos/:page/:limit", function(req, res, next) {
+app.get("/paidVideos/:page/:limit", function(req, res, next) {
     // based on who the user is, return the videos that they have currently paid for
 });
 

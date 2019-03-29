@@ -47,13 +47,13 @@ let backend = (function(){
        send("GET", "/videos/"+id, null, callback);
     }
 
-    module.getVideos(callback){
-       send("GET", "/allVideos/", null, callback);
+    module.getVideos(page, limit, callback){
+       send("GET", "/allVideos/"+page+"/"+limit, null, callback);
     }
 
 
-    module.getCurrentVideos(callback){
-       send("GET", "/paidVideos/", null, callback);
+    module.getCurrentVideos(page, limit, callback){
+       send("GET", "/paidVideos/"+page+"/"+limit, null, callback);
     }
     
     return module;
