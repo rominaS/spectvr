@@ -18,8 +18,8 @@ function ready() {
   }
 
   document
-    .getElementsByClassName("btn-purchase")[0]
-    .addEventListener("click", purchaseClicked);
+    .getElementsByClassName("purchase-btn")[0]
+    .addEventListener("click", stripePurchase);
 }
 
 function purchaseClicked() {
@@ -89,3 +89,39 @@ function updateCartTotal() {
   document.getElementsByClassName("cart-total-price")[0].innerText =
     "$" + total;
 }
+//Stripe-------------------------------
+
+var handler = StripeCheckout.configure({
+  key: "pk_test_DkVbtkiYZlw3Pycj7dkwC4hM00UZQijvA9",
+  image: "https://stripe.com/img/documentation/checkout/marketplace.png",
+  locale: "auto",
+  token: function(token) {
+    console.log(token.id);
+    // You can access the token ID with `token.id`.
+    // Get the token ID to your server-side code for use.
+  }
+});
+
+// document
+//   .getElementById("purchase-btn")[0]
+//   .addEventListener("click", function(e) {
+
+function stripePurchase() {
+  alert("at stripe purchase");
+  // Open Checkout with further options:
+  var totalPrice = document.getElementById("total-price");
+  alert(totalPrice);
+  handler.open({
+    name: "VR Ticket",
+    description: "2 widgets",
+    currency: "cad",
+    amount: document.getElementById("total-price")
+  });
+  updateCartTotal();
+  e.preventDefault();
+}
+
+// Close Checkout on page navigation:
+window.addEventListener("popstate", function() {
+  handler.close();
+});

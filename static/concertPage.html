@@ -8,7 +8,8 @@
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="./js/buyconcert.js" async></script>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <script src="./js/buyconcert.js" type="text/javascript"></script>
   </head>
   <body>
     <div class="topnav">
@@ -46,6 +47,7 @@
             <span class="" name="concertDate"> September 13th 2019</span>
             <span class="" name="concertTime">7:00 PM KST</span>
             <span class="shop-item-price">$50.00 </span>
+            <!-- 
             <form action="/charge" method="POST">
               <script
                 src="https://checkout.stripe.com/checkout.js"
@@ -54,10 +56,10 @@
                 data-amount="5000"
                 data-name="concert ticket"
                 data-description="VR Concert ticket"
-                data-image="/media/spectvrlogo.png"
+                data-image=""
                 data-locale="auto"
               ></script>
-            </form>
+            </form> -->
             <button
               class="btn btn-primary shop-item-button"
               type="button"
@@ -85,7 +87,7 @@
             <span class="" name="concertTime">6:00 PM KST</span>
             <span class="shop-item-price">$45.00 </span>
 
-            <form action="/purchase" method="POST">
+            <!-- <form action="/purchase" method="POST">
               <script
                 src="https://checkout.stripe.com/checkout.js"
                 class="stripe-button"
@@ -96,7 +98,7 @@
                 data-image="/media/spectvrlogo.png"
                 data-locale="auto"
               ></script>
-            </form>
+            </form> -->
 
             <button
               class="btn btn-primary shop-item-button"
@@ -120,12 +122,27 @@
       <div class="cart-items"></div>
       <div class="cart-total">
         <strong class="cart-total-title">Total</strong>
-        <span class="cart-total-price">$0</span>
+        <span id="total-price" class="cart-total-price">$0</span>
       </div>
-      <button class="btn btn-primary btn-purchase" type="button">
+      <button
+        id="purchase-btn"
+        class="btn btn-primary btn-purchase"
+        type="button"
+      >
         PURCHASE
       </button>
     </section>
+    <form action="/charge" method="POST">
+      <script
+        src="https://checkout.stripe.com/checkout.js"
+        class="stripe-button"
+        data-key="pk_test_DkVbtkiYZlw3Pycj7dkwC4hM00UZQijvA9"
+        data-name="concert ticket"
+        data-description="VR Concert ticket"
+        data-image=""
+        data-locale="auto"
+      ></script>
+    </form>
 
     <div class="footer">
       <a href="/credits.html">Credits</a>

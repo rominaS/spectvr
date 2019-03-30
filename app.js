@@ -235,21 +235,21 @@ app.post(
         return res.json(user);
       }
     );
-    // console.log(req.body);
-    // res.send("TEST");
+    console.log(req.body);
+    res.send("TEST");
     
-    // const amount = 5000;
-    // stripe.customer.create({
-    //   email: req.body.stripeEmail,
-    //   source: req.body.stripeToken
-    // })
-    // .then(customer => stripe.charges.create({
-    //   amount:amount,
-    //   description:"SpectVR ticket"
-    //   currency: 'usd',
-    //   customer: customer.id
-    // }))
-    // .then(charge => res.render('success'));
+    const amount = 5000;
+    stripe.customer.create({
+      email: req.body.stripeEmail,
+      source: req.body.stripeToken
+    })
+    .then(customer => stripe.charges.create({
+      amount:amount,
+      description:"SpectVR ticket"
+      currency: 'cad',
+      customer: customer.id
+    }))
+    .then(charge => res.render('success'));
   });
 
 //Server Management -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
