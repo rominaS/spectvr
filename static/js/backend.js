@@ -52,7 +52,7 @@ let backend = (function(){
     }
 
 
-    module.getCurrentVideos(page, limit, callback){
+    module.getPaidForVideos(page, limit, callback){
        send("GET", "/paidVideos/"+page+"/"+limit, null, callback);
     }
     

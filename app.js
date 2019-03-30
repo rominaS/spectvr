@@ -173,19 +173,50 @@ app.post("/image-upload/", upload.array("file", 2), function(req, res) {
 });
 
 app.get("/videos/:id", function(req, res, next) {
-    let params = { Bucket: "spectvr", Key: req.params.id};
+    /*let params = { Bucket: "spectvr", Key: req.params.id};
     s3.getObject(params, function (err, video) {
         res.send(video);
+    });*/
+
+  db.collection("Videos").findOne({ keyVideo: req.params.id }, function(err, video) {
+    if (err) return res.status(500).end(err);
+    if (!user) return res.status(401).end("cannot find video");
+    // add extra check to see if user has paid for the video
+    return res.json({url:video.urlVideo, mimeType:video.mimetypeVideo});
+  });
+});
+
+app.delete("/videos/:id", function(req, res, next) {
+    let params = { Bucket: "spectvr", Key: req.params.id};
+    s3.deleteObject(params, function (err, data) {
+        //res.send(video);
+        // s3 doesn't send you the deleted video back.
     });
 });
 
 app.get("/allVideos/:page/:limit", function(req, res, next) {
     // just go to the database and grab the limit number of items, and skip
     // the amount of items determined by what page you're on
+  return db.collection("Videos").find().sort({keyVideo:1}).map( function(video) {
+    // sus out all of the unnecessary data and return what we need
+    return {url:video.urlThumbnail, mimeType:video.mimetypeThumbnail, title:video.title, artist:video.artist, price:video.price, from:video.from, fromTime:video.fromTime, to:video.to, toTime:video.toTime, description:video.description, id:video.keyVideo};
+  });
 });
 
 app.get("/paidVideos/:page/:limit", function(req, res, next) {
     // based on who the user is, return the videos that they have currently paid for
+  db.collection("Users").findOne(
+      { username: req.session.username},
+      function(err, user) {
+        if (err) return res.status(500).end(err);
+        return user.purchases.map(function(videoId) {
+              db.collection("Videos").findOne({ keyVideo: req.params.id }, function(video) {
+                  // sus out all of the unnecessary data and return what we need
+                  return {url:video.urlThumbnail, mimeType:video.mimetypeThumbnail, title:video.title, artist:video.artist, price:video.price, from:video.from, fromTime:video.fromTime, to:video.to, toTime:video.toTime, description:video.description, id:video.keyVideo};
+                  });
+        });
+      }
+    );
 });
 
 //Purchasing Content ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
