@@ -158,7 +158,6 @@ app.get("/signout/", function(req, res, next) {
 //Video management -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 app.post("/image-upload/", upload.array("file", 2), function(req, res) {
-  console.log(req.body);
   db.collection("Videos").insertOne(
     {
       keyVideo: req.files[1].key,
