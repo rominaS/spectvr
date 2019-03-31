@@ -43,20 +43,20 @@ let backend = (function(){
         send("GET", "/api/users/", null, callback);
     };*/
     
-    module.getVideo(id, callback){
+    module.getVideo= function(id, callback){
        send("GET", "/videos/"+id, null, callback);
     }
 
-    module.getVideos(page, limit, callback){
+    module.getVideos=function(page, limit, callback){
        send("GET", "/allVideos/"+page+"/"+limit, null, callback);
     }
 
-    module.deleteVideo(id, callback){
+    module.deleteVideo = function(id, callback){
        send("DELETE", "/videos/"+id, null, callback);
     }
 
 
-    module.getPaidForVideos(page, limit, callback){
+    module.getPaidForVideos = function(page, limit, callback){
        send("GET", "/paidVideos/"+page+"/"+limit, null, callback);
     }
     
