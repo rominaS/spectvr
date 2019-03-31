@@ -17,10 +17,11 @@ function ready() {
     button.addEventListener("click", addToCartClicked);
   }
 
-  document
-    .getElementsByClassName("purchase-btn")[0]
-    .addEventListener("click", stripePurchase);
+  // document
+  //   .getElementsByClassName("purchase-btn")[0]
+  //   .addEventListener("click", purchaseClicked);
 }
+var concertArray = [];
 
 function purchaseClicked() {
   alert("Thank you for your purchase");
@@ -33,6 +34,15 @@ function purchaseClicked() {
 
 function removeCartItem(event) {
   var buttonClicked = event.target;
+
+  var delId = buttonClicked.parentElement.parentElement.getElementsByClassName(
+    "hidden"
+  )[0].innerHTML;
+  console.log("delId");
+  console.log(delId);
+  var delIdIndex = concertArray.indexOf(delId);
+  concertArray.splice(delIdIndex);
+
   buttonClicked.parentElement.parentElement.remove();
   updateCartTotal();
 }
@@ -43,11 +53,26 @@ function addToCartClicked(event) {
   var title = shopItem.getElementsByClassName("shop-item-title")[0].innerText;
   var price = shopItem.getElementsByClassName("shop-item-price")[0].innerText;
   var imageSrc = shopItem.getElementsByClassName("shop-item-image")[0].src;
-  addItemToCart(title, price, imageSrc);
+  var concertId = shopItem.getElementsByClassName("hidden")[0].innerHTML;
+  addItemToCart(title, price, imageSrc, concertId);
+
+  function checkRep(vid) {
+    return vid == concertId;
+  }
+  if (concertArray != []) {
+    if (concertArray.filter(checkRep) != concertId) {
+      concertArray.push(concertId);
+    }
+  }
+
   updateCartTotal();
+  console.log("concert id is:");
+  console.log(shopItem.getElementsByClassName("hidden")[0].innerHTML);
+  console.log("concertArray is:");
+  console.log(concertArray);
 }
 
-function addItemToCart(title, price, imageSrc) {
+function addItemToCart(title, price, imageSrc, concertId) {
   var cartRow = document.createElement("div");
   cartRow.classList.add("cart-row");
   var cartItems = document.getElementsByClassName("cart-items")[0];
@@ -61,6 +86,7 @@ function addItemToCart(title, price, imageSrc) {
   var cartRowContents = `<div class="cart-item cart-column">
           <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
           <span class="cart-item-title">${title}</span>
+          <b id="concert-id" class="hidden">${concertId}</b>
       </div>
       <div>
       <span class="cart-price cart-column">${price}</span>
@@ -89,39 +115,15 @@ function updateCartTotal() {
   document.getElementsByClassName("cart-total-price")[0].innerText =
     "$" + total;
 }
-//Stripe-------------------------------
 
-var handler = StripeCheckout.configure({
-  key: "pk_test_DkVbtkiYZlw3Pycj7dkwC4hM00UZQijvA9",
-  image: "https://stripe.com/img/documentation/checkout/marketplace.png",
-  locale: "auto",
-  token: function(token) {
-    console.log(token.id);
-    // You can access the token ID with `token.id`.
-    // Get the token ID to your server-side code for use.
-  }
-});
-
-// document
-//   .getElementById("purchase-btn")[0]
-//   .addEventListener("click", function(e) {
-
-function stripePurchase() {
-  alert("at stripe purchase");
-  // Open Checkout with further options:
-  var totalPrice = document.getElementById("total-price");
-  alert(totalPrice);
-  handler.open({
-    name: "VR Ticket",
-    description: "2 widgets",
-    currency: "cad",
-    amount: document.getElementById("total-price")
-  });
-  updateCartTotal();
-  e.preventDefault();
+function onPurchase() {
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    if (xhr.status !== 200)
+      console.error("[" + xhr.status + "]" + xhr.responseText);
+    else console.log(xhr.responseText);
+  };
+  xhr.setRequestHeader("Content-type", "concertArray");
+  xhr.open("PUT", "/purchase", true);
+  xhr.send(concertArray);
 }
-
-// Close Checkout on page navigation:
-window.addEventListener("popstate", function() {
-  handler.close();
-});
