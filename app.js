@@ -152,7 +152,7 @@ app.get("/signout/", function(req, res, next) {
       maxAge: 60 * 60 * 24 * 7 // 1 week in number of seconds
     })
   );
-  return res.json("user has signed out");
+  return res.redirect("/");
 });
 
 //Video management -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -244,11 +244,18 @@ app.get("/paidVideos/:page/:limit", function(req, res, next) {
     user
   ) {
     if (err) return res.status(500).end(err);
+<<<<<<< HEAD
     if (!user) return res.status(401).end("access denied null");
     if (!user.purchases) return res.status(404).end("No videos paidfor");
     return db.collection("Videos").find({"keyVideo" : { "$in" : user.purchases}}).map( function(
         video
       ) {
+=======
+    return db
+      .collection("Videos")
+      .find({ keyVideo: { $in: user.purchases } })
+      .map(function(video) {
+>>>>>>> 88c29548dc7781269ade1d93280888e92708903f
         // sus out all of the unnecessary data and return what we need
         return {
           url: video.urlThumbnail,
@@ -263,50 +270,66 @@ app.get("/paidVideos/:page/:limit", function(req, res, next) {
           description: video.description,
           id: video.keyVideo
         };
-    });
+      });
   });
 });
 
 // for testing purposes only, remove for deployment so I can add videos without paying for them.
 
-
-
 //Purchasing Content ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-app.post(
-  "/purchase/:_id",
-  validateBody,
-  validateParam,
-  isAuthenticated,
-  function(req, res, next) {
-    db.collection("Users").updateOne(
-      { username: req.session.username },
-      { $push: { purchases: req.params._id } },
-      function(err, user) {
-        if (err) return res.status(500).end(err);
-        return res.json(user);
-      }
-    );
-    /*console.log(req.body);
-    res.send("TEST");
+function calculateTotal(concertList) {
+  var totalAmount = 0;
 
-    const amount = 5000;
-    stripe.customer
-      .create({
-        email: req.body.stripeEmail,
-        source: req.body.stripeToken
-      })
-      .then(customer =>
-        stripe.charges.create({
-          amount: amount,
-          description: "SpectVR ticket",
-          currency: "cad",
-          customer: customer.id
-        })
-      )
-      .then(charge => res.render("success"));*/
+  for (var concertId in concertList) {
+    db.collection("Videos")
+      .find()
+      .sort({ keyVideo: concertId })
+      .map(function(err, video) {
+        if (err) return res.status(500).end(err);
+        if (videoId === concertId) {
+          var price = video.price;
+          totalAmount += price;
+        }
+      });
   }
-);
+  return totalAmount;
+}
+
+app.post("/purchase", validateBody, validateParam, isAuthenticated, function(
+  req,
+  res,
+  next
+) {
+  db.collection("Users").updateOne(
+    { username: req.session.username },
+    { $push: { purchases: req.params._id } },
+    function(err, user) {
+      if (err) return res.status(500).end(err);
+      return res.json(user);
+    }
+  );
+
+  console.log(req.body);
+  res.send("test purchase");
+
+  //var amount = calculateTotal(req.params.concertArray);
+  var amount = 5000;
+  stripe.customer
+    .create({
+      email: req.body.stripeEmail,
+      source: req.body.stripeToken
+    })
+    .then(customer =>
+      stripe.charges.create({
+        amount: amount,
+        description: "SpectVR ticket",
+        currency: "cad",
+        customer: customer.id
+      })
+    )
+    .then(charge => res.render("success"));
+});
 
 //Server Management -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 let privateKey = fs.readFileSync("server.key");
