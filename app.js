@@ -152,7 +152,7 @@ app.get("/signout/", function(req, res, next) {
       maxAge: 60 * 60 * 24 * 7 // 1 week in number of seconds
     })
   );
-  return res.json("user has signed out");
+  return res.redirect("/");
 });
 
 //Video management -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
