@@ -178,7 +178,7 @@ app.post("/image-upload/", upload.array("file", 2), function(req, res) {
     { upsert: true },
     function(err) {
       if (err) return res.status(500).end(err);
-      res.send("Successfully uploaded file!");
+      res.redirect("/");
     }
   );
 });
