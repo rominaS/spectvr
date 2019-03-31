@@ -28,7 +28,11 @@
         let username = document.getElementById("username").value;
         let password = document.getElementById("password").value;
         document.getElementById("sign_up_form").reset();
-        backend.signUp(username, password, function(res, err) {});
+        if(e.target.id == "signup"){
+            backend.signUp(username, password, function(res, err) {});
+        } else {
+            backend.signIn(username, password, function(res, err) {});
+        }
       });
   });
 })();
