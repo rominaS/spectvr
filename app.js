@@ -186,6 +186,10 @@ app.post("/image-upload/", upload.array("file", 2), function(req, res) {
 
 app.get("/videos/:id", function(req, res, next) {
   /*let params = { Bucket: "spectvr", Key: req.params.id};
+=======
+app.get("/videos/:id", isAuthenticated, function(req, res, next) {
+    /*let params = { Bucket: "spectvr", Key: req.params.id};
+>>>>>>> Stashed changes
     s3.getObject(params, function (err, video) {
         res.send(video);
     });*/
@@ -241,8 +245,7 @@ app.get("/paidVideos/:page/:limit", function(req, res, next) {
     user
   ) {
     if (err) return res.status(500).end(err);
-    return user.purchases.map(function(videoId) {
-      db.collection("Videos").findOne({ keyVideo: req.params.id }, function(
+    return db.collection("Videos").find({"keyVideo" : { "$in" : user.purchases}}).map( function(
         video
       ) {
         // sus out all of the unnecessary data and return what we need
@@ -259,10 +262,13 @@ app.get("/paidVideos/:page/:limit", function(req, res, next) {
           description: video.description,
           id: video.keyVideo
         };
-      });
     });
   });
 });
+
+// for testing purposes only, remove for deployment so I can add videos without paying for them.
+
+
 
 //Purchasing Content ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -280,7 +286,7 @@ app.post(
         return res.json(user);
       }
     );
-    console.log(req.body);
+    /*console.log(req.body);
     res.send("TEST");
 
     const amount = 5000;
@@ -297,7 +303,7 @@ app.post(
           customer: customer.id
         })
       )
-      .then(charge => res.render("success"));
+      .then(charge => res.render("success"));*/
   }
 );
 
