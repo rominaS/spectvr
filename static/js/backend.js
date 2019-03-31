@@ -51,6 +51,10 @@ let backend = (function(){
        send("GET", "/allVideos/"+page+"/"+limit, null, callback);
     }
 
+    module.deleteVideo(id, callback){
+       send("DELETE", "/videos/"+id, null, callback);
+    }
+
 
     module.getPaidForVideos(page, limit, callback){
        send("GET", "/paidVideos/"+page+"/"+limit, null, callback);
