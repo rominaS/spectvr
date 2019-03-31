@@ -2,15 +2,15 @@
   "use strict";
 
    function createConcertThumbnail(url, name){
-    return '<li href="url">
+    return '<li onclick="createVideoView(url)">
         name
         <button id="watchButton" class="btn">Watch</button>
       </li>'
    }
 
    function createVideoView(url){
-       return '<video id="my-video" class="video-js vjs-default-skin" preload="auto" autoplay="autoplay" crossOrigin="anonymous" width="100%" height="100%" data-setup="{}" controls playsinline webkit-playsinline>
-  <source src="url" type="video/mp4"> <script src="../bundle.js" ></script>'
+       document.getElementById("listMyConcerts").innerHTML = '<video id="my-video" class="video-js vjs-default-skin" preload="auto" autoplay="autoplay" crossOrigin="anonymous" width="100%" height="100%" data-setup="{}" controls playsinline webkit-playsinline>
+  <source src="url" type="video/mp4"> <script src="../bundle.js" ></script>';
    }
 
   window.addEventListener("load", function() {
