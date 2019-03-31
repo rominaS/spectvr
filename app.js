@@ -158,7 +158,6 @@ app.get("/signout/", function(req, res, next) {
 //Video management -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 app.post("/image-upload/", upload.array("file", 2), function(req, res) {
-  console.log(req.body);
   db.collection("Videos").insertOne(
     {
       keyVideo: req.files[1].key,
@@ -179,7 +178,7 @@ app.post("/image-upload/", upload.array("file", 2), function(req, res) {
     { upsert: true },
     function(err) {
       if (err) return res.status(500).end(err);
-      res.send("Successfully uploaded file!");
+      res.redirect("/");
     }
   );
 });
