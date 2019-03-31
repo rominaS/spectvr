@@ -28,11 +28,21 @@
         let username = document.getElementById("username").value;
         let password = document.getElementById("password").value;
         document.getElementById("sign_up_form").reset();
-        if(e.target.id == "signup"){
+        console.log(button);
+        if(button == "signup"){
             backend.signUp(username, password, function(res, err) {});
         } else {
             backend.signIn(username, password, function(res, err) {});
         }
       });
+    let button = "";
+
+    document.getElementById("signup").addEventListener("click", function(){
+      button = "signup";
+    });
+
+    document.getElementById("signin").addEventListener("click", function(){
+      button = "signin";
+    });
   });
 })();

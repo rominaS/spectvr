@@ -38,7 +38,6 @@ let backend = (function(){
         });
     };
 
-    
     module.signIn = function(username, password, callback){
         send("POST", "/signin/", {username, password}, function(err, res){
              callback(err, res);
