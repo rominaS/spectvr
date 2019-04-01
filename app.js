@@ -235,7 +235,7 @@ app.get("/allVideos/:page/:limit", function(req, res, next) {
         description: video.description,
         id: video.keyVideo
       };
-    }).toArray());
+    }).skip(req.params.page*req.params.limit).limit(req.params.limit).toArray());
 });
 
 app.get("/paidVideos/:page/:limit", function(req, res, next) {
@@ -264,7 +264,7 @@ app.get("/paidVideos/:page/:limit", function(req, res, next) {
           description: video.description,
           id: video.keyVideo
         };
-      }).toArray());
+      }).skip(req.params.page*req.params.limit).limit(req.params.limit).toArray());
   });
 });
 
