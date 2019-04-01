@@ -41,7 +41,7 @@
       + "  </div>"
       + "</div> </section>"
    }
-
+        console.log("yolo");
   window.addEventListener("load", function() {
     backend.getVideos(0, 100, function(err, res) {
         console.log("here");

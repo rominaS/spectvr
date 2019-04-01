@@ -215,7 +215,8 @@ app.delete("/videos/:id", function(req, res, next) {
 app.get("/allVideos/:page/:limit", function(req, res, next) {
   // just go to the database and grab the limit number of items, and skip
   // the amount of items determined by what page you're on
-  return db
+ 
+  return res.json(db
     .collection("Videos")
     .find()
     .sort({ keyVideo: 1 })
@@ -234,7 +235,7 @@ app.get("/allVideos/:page/:limit", function(req, res, next) {
         description: video.description,
         id: video.keyVideo
       };
-    });
+    }).toArray());
 });
 
 app.get("/paidVideos/:page/:limit", function(req, res, next) {
