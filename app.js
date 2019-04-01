@@ -247,7 +247,7 @@ app.get("/paidVideos/:page/:limit", function(req, res, next) {
     if (err) return res.status(500).end(err);
     if (!user) return res.status(401).end("access denied null");
     if (!user.purchases) return res.status(404).end("No videos paidfor");
-    return db.collection("Videos").find({"keyVideo" : { "$in" : user.purchases}}).map( function(
+    return res.json(db.collection("Videos").find({"keyVideo" : { "$in" : user.purchases}}).map( function(
         video
       ) {
         // sus out all of the unnecessary data and return what we need
@@ -264,7 +264,7 @@ app.get("/paidVideos/:page/:limit", function(req, res, next) {
           description: video.description,
           id: video.keyVideo
         };
-      });
+      }).toArray());
   });
 });
 
