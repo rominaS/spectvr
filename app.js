@@ -232,7 +232,7 @@ app.get("/allVideos/:page/:limit", function(req, res, next) {
         description: video.description,
         id: video.keyVideo
       };
-    }).skip(req.params.page*req.params.limit).limit(req.params.limit).toArray());
+    }).skip(parseInt(req.params.page)*parseInt(req.params.limit)).limit(parseInt(req.params.limit)).toArray());
 });
 
 app.get("/paidVideos/:page/:limit", function(req, res, next) {
