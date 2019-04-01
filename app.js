@@ -212,7 +212,8 @@ app.delete("/videos/:id", function(req, res, next) {
 app.get("/allVideos/:page/:limit", function(req, res, next) {
   // just go to the database and grab the limit number of items, and skip
   // the amount of items determined by what page you're on
-  return db
+ 
+  return res.json(db
     .collection("Videos")
     .find()
     .sort({ keyVideo: 1 })
@@ -231,7 +232,7 @@ app.get("/allVideos/:page/:limit", function(req, res, next) {
         description: video.description,
         id: video.keyVideo
       };
-    });
+    }).skip(req.params.page*req.params.limit).limit(req.params.limit).toArray());
 });
 
 app.get("/paidVideos/:page/:limit", function(req, res, next) {
@@ -243,7 +244,7 @@ app.get("/paidVideos/:page/:limit", function(req, res, next) {
     if (err) return res.status(500).end(err);
     if (!user) return res.status(401).end("access denied null");
     if (!user.purchases) return res.status(404).end("No videos paidfor");
-    return db.collection("Videos").find({"keyVideo" : { "$in" : user.purchases}}).map( function(
+    return res.json(db.collection("Videos").find({"keyVideo" : { "$in" : user.purchases}}).map( function(
         video
       ) {
         // sus out all of the unnecessary data and return what we need
@@ -260,7 +261,7 @@ app.get("/paidVideos/:page/:limit", function(req, res, next) {
           description: video.description,
           id: video.keyVideo
         };
-      });
+      }).skip(req.params.page*req.params.limit).limit(req.params.limit).toArray());
   });
 });
 

@@ -17,35 +17,16 @@
            + " <span class='' name='concertDate'>"+ date+"</span>"
            + " <span class='' name='concertTime'>"+time+"</span>"
            + " <span class='shop-item-price'>$"+price +"</span>"
-           + " <!-- "
-          + "  <form action='/charge' method='POST'>"
-           + "   <script"
-            + "    src='https://checkout.stripe.com/checkout.js'"
-            + "    class='stripe-button'"
-           + "     data-key='{{ pk_test_DkVbtkiYZlw3Pycj7dkwC4hM00UZQijvA9 }}'"
-           + "     data-amount='5000'"
-          + "      data-name='concert ticket'"
-            + "    data-description='VR Concert ticket'"
-            + "    data-image=''"
-           + "     data-locale='auto'"
-           + "   ></script>"
-          + "  </form> -->"
-          + "  <button"
-           + "   class='btn btn-primary shop-item-button'"
-         + "     type='button'"
-          + "    id='buyConcert'"
-          + "  >"
-          + "    Buy VR Concert Ticket"
-         + "   </button>"
+           + "<a href='/concertPage.html' id='buyConcert'>"
+           +  " Buy Ticket"
+           + "</a>"
        + "   </div>"
       + "  </div>"
       + "</div> </section>"
    }
-        console.log("yolo");
   window.addEventListener("load", function() {
     backend.getVideos(0, 100, function(err, res) {
-        console.log("here");
-        document.getElementById("displayCart").innerHTML = "";
+        document.getElementById("featuredConcerts").innerHTML = "";
         let concert;
         for(concert in res){
             document.getElementById("displayCart").innerHTML += createConcertThumbnail(concert.url, concert.title);
