@@ -7,28 +7,25 @@ app.use(bodyParser.json());
 const cookie = require("cookie");
 const session = require("express-session");
 const mongodb = require("mongodb");
-const uri =
-  process.env.MONGODB_URI ||
-  "mongodb://SpectVRAdmin:spectvr1@ds159926.mlab.com:59926/heroku_rc0df5jw";
+const uri = process.env.MONGODB_URI;
 
 const multer = require("multer");
 const multerS3 = require("multer-s3");
 const aws = require("aws-sdk");
 
 //stripe secret key
-const stripe = require("stripe")("sk_test_qOpoIykDyfgbJKNxodiTiPfv003qPGMO4r");
+const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 aws.config.update({
   // Your SECRET ACCESS KEY from AWS should go here,
   // Never share it!
   // Setup Env Variable, e.g: process.env.SECRET_ACCESS_KEY
   secretAccessKey:
-    process.env.AWS_SECRET_ACCESS_KEY ||
-    "DAAuGfpHWAgPv9edV+hyfVIp4/i8XnvRKT8HAybu",
+    process.env.AWS_SECRET_ACCESS_KEY,
   // Not working key, Your ACCESS KEY ID from AWS should go here,
   // Never share it!
   // Setup Env Variable, e.g: process.env.ACCESS_KEY_ID
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID || "AKIAJ47FKQAVP6RR6E3Q",
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   region: "us-east-2" // region of your bucket
 });
 
@@ -54,7 +51,7 @@ let db;
 //Authenication -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 app.use(
   session({
-    secret: "rapier",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true
   })
