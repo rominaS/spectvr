@@ -28,6 +28,7 @@
     backend.getVideos(0, 100, function(err, res) {
         document.getElementById("featuredConcerts").innerHTML = "";
         let concert;   
+        console.log(concerts);
         for(concert in res){
             document.getElementById("featuredConcerts").innerHTML += createConcertThumbnail(concert.url, concert.title, concert.artist, concert.from, concert.fromTime, concert.price);
         }
