@@ -31,7 +31,7 @@
         console.log(res);
         console.log(res[0].title);
         let i = 0;
-        for(i < res.length; i++){
+        for(i; i < res.length; i++){
             document.getElementById("featuredConcerts").innerHTML += createConcertThumbnail(res[i].url, res[i].title, res[i].artist, res[i].from, res[i].fromTime, res[i].price);
         }
     });
