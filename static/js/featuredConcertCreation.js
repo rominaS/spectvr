@@ -29,7 +29,7 @@
         document.getElementById("featuredConcerts").innerHTML = "";
         let concert;   
         console.log(res);
-        console.log(res[0].title);
+        console.log(res[0].url);
         let i = 0;
         for(i; i < res.length; i++){
             document.getElementById("featuredConcerts").innerHTML += createConcertThumbnail(res[i].url, res[i].title, res[i].artist, res[i].from, res[i].fromTime, res[i].price);
