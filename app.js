@@ -235,7 +235,7 @@ app.get("/allVideos/:page/:limit", function(req, res, next) {
         description: video.description,
         id: video.keyVideo
       };
-    }).skip(parseInt(req.params.page)*parseInt(req.params.limit)).limit(parseInt(req.params.limit)).toArray().returnResult(res);
+    }).skip(parseInt(req.params.page)*parseInt(req.params.limit)).limit(parseInt(req.params.limit)).toArray(function(err, videos){return res.json(videos)});
 });
 
 app.get("/paidVideos/:page/:limit", function(req, res, next) {
