@@ -29,7 +29,7 @@
         document.getElementById("featuredConcerts").innerHTML = "";
         let concert;   
         for(concert in res){
-            document.getElementById("featuredConcerts").innerHTML += createConcertThumbnail(concert.url, concert.title);
+            document.getElementById("featuredConcerts").innerHTML += createConcertThumbnail(concert.url, concert.title, concert.artist, concert.from, concert.fromTime, concert.price);
         }
     });
   });
