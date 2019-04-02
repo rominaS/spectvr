@@ -209,12 +209,15 @@ app.delete("/videos/:id", function(req, res, next) {
   });
 });
 
+function returnResults(database, res){
+    return res.json(databse);
+}
+
 app.get("/allVideos/:page/:limit", function(req, res, next) {
   // just go to the database and grab the limit number of items, and skip
   // the amount of items determined by what page you're on
  
-  var result = db
-    .collection("Videos")
+  db.collection("Videos")
     .find()
     .sort({ keyVideo: 1 })
     .map(function(video) {
@@ -232,8 +235,7 @@ app.get("/allVideos/:page/:limit", function(req, res, next) {
         description: video.description,
         id: video.keyVideo
       };
-    }).skip(parseInt(req.params.page)*parseInt(req.params.limit)).limit(parseInt(req.params.limit)).toArray();
-    return res.json(result);
+    }).skip(parseInt(req.params.page)*parseInt(req.params.limit)).limit(parseInt(req.params.limit)).toArray().returnResult(res);
 });
 
 app.get("/paidVideos/:page/:limit", function(req, res, next) {
