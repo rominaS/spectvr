@@ -27,7 +27,7 @@
   window.addEventListener("load", function() {
     backend.getVideos(0, 100, function(err, res) {
         document.getElementById("featuredConcerts").innerHTML = "";
-        let concert;
+        let concert;   
         for(concert in res){
             document.getElementById("displayCart").innerHTML += createConcertThumbnail(concert.url, concert.title);
         }
