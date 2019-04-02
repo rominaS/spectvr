@@ -29,8 +29,10 @@
         document.getElementById("featuredConcerts").innerHTML = "";
         let concert;   
         console.log(res);
-        for(concert in res){
-            document.getElementById("featuredConcerts").innerHTML += createConcertThumbnail(concert.url, concert.title, concert.artist, concert.from, concert.fromTime, concert.price);
+        console.log(res[0].title);
+        let i = 0;
+        for(i < res.length; i++){
+            document.getElementById("featuredConcerts").innerHTML += createConcertThumbnail(res[i].url, res[i].title, res[i].artist, res[i].from, res[i].fromTime, res[i].price);
         }
     });
   });
