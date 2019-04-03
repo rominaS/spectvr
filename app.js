@@ -135,8 +135,8 @@ app.post("/signin/", validateBody, validateParam, function (req, res, next) {
         maxAge: 60 * 60 * 24 * 7
       })
     );
-    res.json("user " + username + " signed in");
-    return res.redirect("/");
+    return res.json("user " + username + " signed in");
+    // return res.redirect("/");
   });
 });
 
