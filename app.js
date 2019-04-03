@@ -307,7 +307,7 @@ app.post("/purchase", validateBody, validateParam, isAuthenticated, function (
   console.log(req.body);
   //res.send("test purchase");
   //res.send("test purchase");
-  res.render("/success.html");
+  //res.render("/success.html");
 
   //var amount = calculateTotal(req.params.concertArray);
   var amount = 5000;
@@ -324,7 +324,7 @@ app.post("/purchase", validateBody, validateParam, isAuthenticated, function (
         customer: customer.id
       })
     )
-    .then(charge => res.render("success.html"));
+    .then(charge => res.render("success"));
 });
 
 //Server Management -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
