@@ -306,7 +306,7 @@ app.post("/purchase", validateBody, validateParam, isAuthenticated, function (
   );
 
   console.log(req.body);
-  res.redirect("/success.html");
+  res.redirect("/myConcerts.html");
 
 
   //var amount = calculateTotal(req.params.concertArray);
