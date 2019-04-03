@@ -4,6 +4,11 @@
 ### Hosting
 
 [SpectVR](https://nameless-everglades-35234.herokuapp.com/)
+
+### Video Demo
+https://youtu.be/7SMk34Bqo0s
+
+
 ### Team Members
 
  - Charles Ruan
