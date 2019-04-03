@@ -36,10 +36,10 @@ let upload = multer({
     bucket: "spectvr",
     contentType: multerS3.AUTO_CONTENT_TYPE,
     acl: "public-read",
-    metadata: function(req, file, cb) {
+    metadata: function (req, file, cb) {
       cb(null, { fieldName: file.fieldname });
     },
-    key: function(req, file, cb) {
+    key: function (req, file, cb) {
       cb(null, Date.now().toString());
     }
   })
@@ -57,13 +57,13 @@ app.use(
   })
 );
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   console.log("HTTPS request", req.method, req.url, req.body);
   req.username = "username" in req.session ? req.session.username : null;
   next();
 });
 
-let isAuthenticated = function(req, res, next) {
+let isAuthenticated = function (req, res, next) {
   if (!req.username) return res.status(401).end("access denied");
   next();
 };
@@ -93,7 +93,7 @@ const validateParam = [
     .escape()
 ];
 
-app.post("/signup/", validateBody, validateParam, function(req, res, next) {
+app.post("/signup/", validateBody, validateParam, function (req, res, next) {
   let username = req.body.username;
   let password = req.body.password;
   let salt = generateSalt();
@@ -101,7 +101,7 @@ app.post("/signup/", validateBody, validateParam, function(req, res, next) {
   db.collection("Users").insertOne(
     { username: username, password: hash, salt: salt, purchases: {} },
     { upsert: true },
-    function(err) {
+    function (err) {
       if (err) return res.status(500).end(err);
       // initialize cookie
       res.setHeader(
@@ -117,11 +117,11 @@ app.post("/signup/", validateBody, validateParam, function(req, res, next) {
 });
 
 // curl -H "Content-Type: application/json" -X POST -d '{"username":"alice","password":"alice"}' -c cookie.txt localhost:3000/signin/
-app.post("/signin/", validateBody, validateParam, function(req, res, next) {
+app.post("/signin/", validateBody, validateParam, function (req, res, next) {
   let username = req.body.username;
   let password = req.body.password;
   // retrieve user from the database
-  db.collection("Users").findOne({ username: username }, function(err, user) {
+  db.collection("Users").findOne({ username: username }, function (err, user) {
     if (err) return res.status(500).end(err);
     if (!user) return res.status(401).end("access denied null");
     if (user.password !== generateHash(password, user.salt))
@@ -140,7 +140,7 @@ app.post("/signin/", validateBody, validateParam, function(req, res, next) {
 });
 
 // curl -b cookie.txt -c cookie.txt localhost:3000/signout/
-app.get("/signout/", function(req, res, next) {
+app.get("/signout/", function (req, res, next) {
   req.session.destroy();
   res.setHeader(
     "Set-Cookie",
@@ -154,7 +154,7 @@ app.get("/signout/", function(req, res, next) {
 
 //Video management -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-app.post("/image-upload/", upload.array("file", 2), function(req, res) {
+app.post("/image-upload/", upload.array("file", 2), function (req, res) {
   db.collection("Videos").insertOne(
     {
       keyVideo: req.files[1].key,
@@ -173,14 +173,14 @@ app.post("/image-upload/", upload.array("file", 2), function(req, res) {
       description: req.body.description
     },
     { upsert: true },
-    function(err) {
+    function (err) {
       if (err) return res.status(500).end(err);
       res.redirect("/");
     }
   );
 });
 
-app.get("/videos/:id", function(req, res, next) {
+app.get("/videos/:id", function (req, res, next) {
   /*let params = { Bucket: "spectvr", Key: req.params.id};
 =======
 app.get("/videos/:id", isAuthenticated, function(req, res, next) {
@@ -190,7 +190,7 @@ app.get("/videos/:id", isAuthenticated, function(req, res, next) {
         res.send(video);
     });*/
 
-  db.collection("Videos").findOne({ keyVideo: req.params.id }, function(
+  db.collection("Videos").findOne({ keyVideo: req.params.id }, function (
     err,
     video
   ) {
@@ -201,26 +201,26 @@ app.get("/videos/:id", isAuthenticated, function(req, res, next) {
   });
 });
 
-app.delete("/videos/:id", function(req, res, next) {
+app.delete("/videos/:id", function (req, res, next) {
   let params = { Bucket: "spectvr", Key: req.params.id };
-  s3.deleteObject(params, function(err, data) {
+  s3.deleteObject(params, function (err, data) {
     //res.send(video);
     // s3 doesn't send you the deleted video back.
   });
 });
 
-function returnResults(database, res){
-    return res.json(databse);
+function returnResults(database, res) {
+  return res.json(databse);
 }
 
-app.get("/allVideos/:page/:limit", function(req, res, next) {
+app.get("/allVideos/:page/:limit", function (req, res, next) {
   // just go to the database and grab the limit number of items, and skip
   // the amount of items determined by what page you're on
- 
+
   db.collection("Videos")
     .find()
     .sort({ keyVideo: 1 })
-    .map(function(video) {
+    .map(function (video) {
       // sus out all of the unnecessary data and return what we need
       return {
         url: video.urlThumbnail,
@@ -235,36 +235,36 @@ app.get("/allVideos/:page/:limit", function(req, res, next) {
         description: video.description,
         id: video.keyVideo
       };
-    }).skip(parseInt(req.params.page)*parseInt(req.params.limit)).limit(parseInt(req.params.limit)).toArray(function(err, videos){return res.json(videos)});
+    }).skip(parseInt(req.params.page) * parseInt(req.params.limit)).limit(parseInt(req.params.limit)).toArray(function (err, videos) { return res.json(videos) });
 });
 
-app.get("/paidVideos/:page/:limit", function(req, res, next) {
+app.get("/paidVideos/:page/:limit", function (req, res, next) {
   // based on who the user is, return the videos that they have currently paid for
-  db.collection("Users").findOne({ username: req.session.username }, function(
+  db.collection("Users").findOne({ username: req.session.username }, function (
     err,
     user
   ) {
     if (err) return res.status(500).end(err);
     if (!user) return res.status(401).end("access denied null");
     if (!user.purchases) return res.status(404).end("No videos paidfor");
-    var result = db.collection("Videos").find({"keyVideo" : { "$in" : user.purchases}}).map( function(
-        video
-      ) {
-        // sus out all of the unnecessary data and return what we need
-        return {
-          url: video.urlThumbnail,
-          mimeType: video.mimetypeThumbnail,
-          title: video.title,
-          artist: video.artist,
-          price: video.price,
-          from: video.from,
-          fromTime: video.fromTime,
-          to: video.to,
-          toTime: video.toTime,
-          description: video.description,
-          id: video.keyVideo
-        };
-      }).skip(parseInt(req.params.page)*parseInt(req.params.limit)).limit(parseInt(req.params.limit)).toArray(function(err, videos){return res.json(videos)});
+    var result = db.collection("Videos").find({ "keyVideo": { "$in": user.purchases } }).map(function (
+      video
+    ) {
+      // sus out all of the unnecessary data and return what we need
+      return {
+        url: video.urlThumbnail,
+        mimeType: video.mimetypeThumbnail,
+        title: video.title,
+        artist: video.artist,
+        price: video.price,
+        from: video.from,
+        fromTime: video.fromTime,
+        to: video.to,
+        toTime: video.toTime,
+        description: video.description,
+        id: video.keyVideo
+      };
+    }).skip(parseInt(req.params.page) * parseInt(req.params.limit)).limit(parseInt(req.params.limit)).toArray(function (err, videos) { return res.json(videos) });
   });
 });
 
@@ -279,7 +279,7 @@ function calculateTotal(concertList) {
     db.collection("Videos")
       .find()
       .sort({ keyVideo: concertId })
-      .map(function(err, video) {
+      .map(function (err, video) {
         if (err) return res.status(500).end(err);
         if (videoId === concertId) {
           var price = video.price;
@@ -290,7 +290,7 @@ function calculateTotal(concertList) {
   return totalAmount;
 }
 
-app.post("/purchase", validateBody, validateParam, isAuthenticated, function(
+app.post("/purchase", validateBody, validateParam, isAuthenticated, function (
   req,
   res,
   next
@@ -298,14 +298,14 @@ app.post("/purchase", validateBody, validateParam, isAuthenticated, function(
   db.collection("Users").updateOne(
     { username: req.session.username },
     { $push: { purchases: req.params._id } },
-    function(err, user) {
+    function (err, user) {
       if (err) return res.status(500).end(err);
       return res.json(user);
     }
   );
 
   console.log(req.body);
-  res.send("test purchase");
+  res.send("/success.html");
 
   //var amount = calculateTotal(req.params.concertArray);
   var amount = 5000;
@@ -336,7 +336,7 @@ let config = {
 const http = require("http");
 const PORT = process.env.PORT || 3000;
 
-mongodb.MongoClient.connect(uri, { useNewUrlParser: true }, function(
+mongodb.MongoClient.connect(uri, { useNewUrlParser: true }, function (
   err,
   client
 ) {
@@ -348,7 +348,7 @@ mongodb.MongoClient.connect(uri, { useNewUrlParser: true }, function(
   db = client.db();
   console.log("Database connected");
 
-  http.createServer(app).listen(PORT, function(err) {
+  http.createServer(app).listen(PORT, function (err) {
     if (err) console.log(err);
     else console.log("HTTPS server started on port", PORT);
   });
