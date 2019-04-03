@@ -135,7 +135,8 @@ app.post("/signin/", validateBody, validateParam, function (req, res, next) {
         maxAge: 60 * 60 * 24 * 7
       })
     );
-    return res.json("user " + username + " signed in");
+    res.json("user " + username + " signed in");
+    return res.redirect("/");
   });
 });
 
@@ -305,9 +306,8 @@ app.post("/purchase", validateBody, validateParam, isAuthenticated, function (
   );
 
   console.log(req.body);
-  //res.send("test purchase");
-  //res.send("test purchase");
-  //res.render("/success.html");
+  res.redirect("/success.html");
+
 
   //var amount = calculateTotal(req.params.concertArray);
   var amount = 5000;
