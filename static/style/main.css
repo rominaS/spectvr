@@ -1,10 +1,13 @@
+
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans|Raleway');
+
 html {
   overflow: -moz-scrollbars-vertical;
 }
 
 body {
-  background: #dbdee7;
-  font-family: "" Trebuchet " MS", Helvetica, sans-serif;
+  background: #fff;
+  font-family: 'Raleway', sans-serif;
   font-size: 14px;
   color: #000000;
   text-align: left;
@@ -15,40 +18,59 @@ body {
   margin: 0 auto;
 }
 
-header {
-  background: #df4edf;
-}
-
-/* header::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.logo {
-  float: center;
-} */
-
-/* nav {
-  float: right;
-}
-
-nav ul {
+ul.navBar {
+  list-style-type: none;
   margin: 0;
   padding: 0;
-  list-style: none;
+  overflow: hidden;
+  background-color: #ffd3e7
+  ;
+  box-shadow: none;
 }
-nav li {
+
+ul.navBar li {float: left;}
+
+ul.navBar li a {
   display: inline-block;
-  margin-left: 70px;
-  padding-top: 25px;
-} */
+  position:relative;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #ff00ae;
+  text-shadow: none;
+}
+
+ul.navBar li a::before {
+  content: '';
+  width: 0px;
+  height: 2px;
+  background: #FFF;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transition: all 0.0s ease-out;
+}
+
+ul.navBar li a:hover::before {
+  width: 100%;
+}
+
+img.navBar {
+  width: 170px;
+  height: 46px;
+  position: absolute;
+  top:0px;
+  right: 20px;
+}
+
 header #title {
   color: #000000;
   text-decoration: none;
   margin: 0px;
   width: 100%;
   font-size: 40px;
+  text-align: center;
 }
 
 .header_btn {
@@ -85,15 +107,6 @@ footer {
   content: "Error: ";
 }
 
-/* ul {
-  background: #3399ff;
-  padding: 20px;
-}
-
-ul li {
-  background: #cce5ff;
-  margin: 5px;
-} */
 
 .alert {
   color: red;
@@ -144,29 +157,9 @@ ul li {
   clear: both;
   box-sizing: border-box;
 }
-.topnav {
-  overflow: hidden;
-  background-color: rgb(243, 73, 229);
-}
-
-/* Style the topnav links */
-.topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* Change color on hover */
-.topnav a:hover {
-  background-color: rgba(221, 221, 221, 0.623);
-  color: rgb(229, 155, 207);
-}
 .footer {
   padding: 10px;
   text-align: center;
-  background: #ddd;
+  background: #ffd3e7;
   margin-top: 10;
 }

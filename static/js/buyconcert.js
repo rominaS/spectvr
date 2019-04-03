@@ -38,8 +38,8 @@ function removeCartItem(event) {
   var delId = buttonClicked.parentElement.parentElement.getElementsByClassName(
     "hidden"
   )[0].innerHTML;
-  console.log("delId");
-  console.log(delId);
+  // console.log("delId");
+  // console.log(delId);
   var delIdIndex = concertArray.indexOf(delId);
   concertArray.splice(delIdIndex);
 
@@ -66,10 +66,10 @@ function addToCartClicked(event) {
   }
 
   updateCartTotal();
-  console.log("concert id is:");
-  console.log(shopItem.getElementsByClassName("hidden")[0].innerHTML);
-  console.log("concertArray is:");
-  console.log(concertArray);
+  // console.log("concert id is:");
+  // console.log(shopItem.getElementsByClassName("hidden")[0].innerHTML);
+  // console.log("concertArray is:");
+  // console.log(concertArray);
 }
 
 function addItemToCart(title, price, imageSrc, concertId) {
