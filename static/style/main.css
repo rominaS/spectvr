@@ -64,6 +64,26 @@ img.navBar {
   right: 20px;
 }
 
+topnav {
+  overflow: hidden;
+  background-color: rgb(243, 73, 229);
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: rgba(221, 221, 221, 0.623);
+  color: rgb(229, 155, 207);
+}
 header #title {
   color: #000000;
   text-decoration: none;
