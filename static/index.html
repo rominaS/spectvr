@@ -6,74 +6,97 @@
   <title>SpectVR</title>
   <link rel="stylesheet" type="text/css" href="./style/store.css" />
   <link rel="stylesheet" type="text/css" href="./style/main.css" />
-
   <!-- Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 
   <!--Let browser know website is optimized for mobile-->
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- <img src="media/spectvrlogo.png" alt="logo" /> -->
 
-  <ul class="navBar">
-    <li> <a href="/index.html">Upcoming Concerts</a></li>
-    <li> <a href="/about.html">How does this work</a></li>
-    <li> <a href="/login.html" style="float:right">Sign In / Sign Up</a></li>
-    <li> <a href="/signout/" style="float:right">Sign out</a></li>
-  </ul>
-  <a href="/index.html">
-    <img class="navBar" src="media/spectvrlogo.png" alt="SpectVR">
-  </a>
+  <!-- <nav>
+      <ul>
+        <li><a href="/index.html">Upcoming Concerts</a></li>
+        <li><a href="/about.html">How does this work</a></li>
+        <li>
+          <a href="/login.html" id="signin_btn" style="float:right"
+            >Sign In / Sign Up</a
+          >
+        </li>
+        <li>
+          <a href="/signout/" id="signout_btn" style="float:right">Sign Out</a>
+        </li>
+      </ul>
+    </nav> -->
 </head>
 
 <body>
   <p id="error_box"></p>
 
-  <!-- <div class="topnav">
+  <div class="topnav">
+
     <a href="/index.html">Upcoming Concerts</a>
     <a href="/about.html">How does this work</a>
+    <a href="/index.html">
+      <img class="topnav" src="media/spectvrlogo.png" alt="SpectVR">
+    </a>
+    <!-- <img class="topnav" src="media/spectvrlogo.png" alt="SpectVR"> -->
     <a href="/login.html" style="float:right" id="signin_btn" class="btn head_btn ">Sign In / Sign Up</a>
     <a href="/signout/" style="float: right" id="signout_btn" class="btn head_btn ">Sign out</a>
-  </div> -->
 
+  </div>
 
+  <section id="featuredConcerts">
+    <section class="container content-section">
 
-  <h2 style="align-content:center">Up Coming Concerts</h2>
+      <div class="shop-items">
+        <div class="shop-item">
+          <img src="/media/homepage.png">
+        </div>
 
-  <section class="container content-section">
-    <div class="shop-items">
-      <div class="shop-item">
-        <span class="shop-item-title" name="concertName">SHINee World VI</span>
-        <img class="shop-item-image" alt="concert-img"
-          src="http://theseoulstory.com/wp-content/uploads/2016/10/14650122_1307781205908212_3590621079867843424_n.png" />
-        <div class="shop-item-details">
-          <span class="" name="artistName">SHINee </span>
-          <!-- <span class="" name="concertDate"> September 13th 2019</span>
+        <div class="shop-item">
+          <span class="shop-item-title" name="concertName">SHINee World VI</span>
+          <img class="shop-item-image" alt="concert-img"
+            src="http://theseoulstory.com/wp-content/uploads/2016/10/14650122_1307781205908212_3590621079867843424_n.png" />
+          <div class="shop-item-details">
+            <span class="" name="artistName">SHINee </span>
+            <!-- <span class="" name="concertDate"> September 13th 2019</span>
             <span class="" name="concertTime">7:00 PM KST</span> -->
-          <button href="/concertPage.html" id="buyConcert">
-            Tickets
-          </button>
+            <a href="/concertPage.html" id="buyConcert">
+              Buy Ticket
+            </a>
+          </div>
         </div>
-      </div>
 
 
-      <div class="shop-item">
-        <span class="shop-item-title" name="concertName">INSPRIED Toronto</span>
-        <img class="shop-item-image" alt="concert-img"
-          src="https://i0.wp.com/shineeusa.net/wp-content/uploads/2017/11/171115_TicketingImage3.jpg?fit=700%2C992&ssl=1" />
-        <div class="shop-item-details">
-          <span class="" name="artistName">Jonghyun </span>
-          <!-- <span class="" name="concertDate"> Dec 9th 2019</span>
+
+
+        <div class="shop-item">
+          <span class="shop-item-title" name="concertName">INSPRIED Toronto</span>
+          <img class="shop-item-image" alt="concert-img"
+            src="https://i0.wp.com/shineeusa.net/wp-content/uploads/2017/11/171115_TicketingImage3.jpg?fit=700%2C992&ssl=1" />
+          <div class="shop-item-details">
+            <span class="" name="artistName">Jonghyun </span>
+            <!-- <span class="" name="concertDate"> Dec 9th 2019</span>
             <span class="" name="concertTime">6:00 PM KST</span> -->
-          <button href="/concertPage.html" id="buyConcert">
-            Tickets
-          </button>
+            <a href="/concertPage.html" id="buyConcert">
+              Buy Ticket
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-
+    </section>
   </section>
 
+  <div>
+    <a href="/about.html">How does this work?</a>
+  </div>
+  <div>
+    <a href="/upload.html">Upload</a>
+  </div>
+  <!-- <div id="like_button_container"></div> -->
 
   <!-- <libraries -->
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>

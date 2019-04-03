@@ -305,6 +305,8 @@ app.post("/purchase", validateBody, validateParam, isAuthenticated, function (
   );
 
   console.log(req.body);
+  //res.send("test purchase");
+  //res.send("test purchase");
   res.send("/success.html");
 
   //var amount = calculateTotal(req.params.concertArray);

@@ -6,7 +6,7 @@ html {
 }
 
 body {
-  background: #fff;
+  background: #ffffff;
   font-family: 'Raleway', sans-serif;
   font-size: 14px;
   color: #000000;
@@ -18,79 +18,40 @@ body {
   margin: 0 auto;
 }
 
-ul.navBar {
-  list-style-type: none;
+header {
+  background: #ffd3e7;
+}
+
+/* header::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.logo {
+  float: center;
+} */
+
+/* nav {
+  float: right;
+}
+
+nav ul {
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  background-color: #ffd3e7
-  ;
-  box-shadow: none;
+  list-style: none;
 }
-
-ul.navBar li {float: left;}
-
-ul.navBar li a {
+nav li {
   display: inline-block;
-  position:relative;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 16px;
-  color: #ff00ae;
-  text-shadow: none;
-}
-
-ul.navBar li a::before {
-  content: '';
-  width: 0px;
-  height: 2px;
-  background: #FFF;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  transition: all 0.0s ease-out;
-}
-
-ul.navBar li a:hover::before {
-  width: 100%;
-}
-
-img.navBar {
-  width: 170px;
-  height: 46px;
-  position: absolute;
-  top:0px;
-  right: 20px;
-}
-
-topnav {
-  overflow: hidden;
-  background-color: rgb(243, 73, 229);
-}
-
-/* Style the topnav links */
-.topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* Change color on hover */
-.topnav a:hover {
-  background-color: rgba(221, 221, 221, 0.623);
-  color: rgb(229, 155, 207);
-}
+  margin-left: 70px;
+  padding-top: 25px;
+} */
 header #title {
   color: #000000;
   text-decoration: none;
   margin: 0px;
   width: 100%;
   font-size: 40px;
-  text-align: center;
 }
 
 .header_btn {
@@ -100,8 +61,8 @@ header #title {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0px;
-  font-family: "Trebuchet MS", Helvetica, sans-serif;
-  color: #1a1a1a;
+  font-family: 'Raleway', sans-serif;
+  color: #ffd3e7;
   font-size: 23px;
   background: #ffdbff;
   padding: 3px 11px 4px 11px;
@@ -127,6 +88,15 @@ footer {
   content: "Error: ";
 }
 
+/* ul {
+  background: #3399ff;
+  padding: 20px;
+}
+
+ul li {
+  background: #cce5ff;
+  margin: 5px;
+} */
 
 .alert {
   color: red;
@@ -177,9 +147,39 @@ footer {
   clear: both;
   box-sizing: border-box;
 }
+.topnav {
+  overflow: hidden;
+  background-color: #ffd3e7;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #ff00ae;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: rgba(221, 221, 221, 0.623);
+  color: rgb(229, 155, 207);
+}
+
+img.topnav {
+  width: 170px;
+  height: 49px;
+  position: absolute;
+  top:49px;
+  right: 45%;
+  
+}
+
 .footer {
   padding: 10px;
   text-align: center;
-  background: #ffd3e7;
+  background: #ddd;
   margin-top: 10;
 }

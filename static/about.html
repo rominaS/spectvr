@@ -5,24 +5,27 @@
   <title>SpectVR - Add Concert</title>
   <meta charset="utf-8" />
   <link href="./style/main.css" rel="stylesheet" type="text/css" />
+  <link href="./style/store.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-  <ul class="navBar">
-    <li> <a href="/index.html">Upcoming Concerts</a></li>
-    <li> <a href="/about.html">How does this work</a></li>
-    <li> <a href="/login.html" style="float:right">Sign In / Sign Up</a></li>
-    <li> <a href="/signout/" style="float:right">Sign out</a></li>
-  </ul>
-  <a href="/index.html">
-    <img class="navBar" src="media/spectvrlogo.png" alt="SpectVR">
-  </a>
-  <h1 a>How does this work?</h1>
-
-  <img src="/media/vrconcerts.png" />
-  <img src="/media/imagine.png" />
+  <div class="topnav">
+    <a href="/index.html">Upcoming Concerts</a>
+    <a href="/about.html">How does this work</a>
+    <a href="/login.html" style="float:right" id="signin_btn" class="btn head_btn ">Sign In / Sign Up</a>
+    <a href="/signout/" style="float: right" id="signout_btn" class="btn head_btn ">Sign out</a>
+  </div>
 
 
+
+  <div class="shop-items">
+    <div class="shop-item">
+      <img src="/media/kpopvrconcerts.png" style="width:700px;height:400px;" />
+    </div>
+    <div class="shop-item">
+      <img src="/media/imagine.png">
+    </div>
+  </div>
   <div class="footer">
     <a href="/credits.html">Credits</a>
     <a href="/index.html">Home</a>
