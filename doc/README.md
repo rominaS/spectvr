@@ -117,7 +117,8 @@ $ curl -X DELETE
       - toTime: (string) the last time the video can be viewed
       - price: (string) the price of the video
       - description: (string) the description of the video
-      - url: (string) the link to the video
+      - url: (string) the link to the image describing the video
+      - mimeType: (string) the mimeType of the image
 - response: 500
     - body: internal server error
 ``` 
@@ -138,7 +139,8 @@ $ curl https://nameless-everglades-35234.herokuapp.com/allVideos/0/100
       - toTime: (string) the last time the video can be viewed
       - price: (string) the price of the video
       - description: (string) the description of the video
-      - url: (string) the link to the video
+      - url: (string) the link to the image describing the video
+      - mimeType: (string) the mimetype of the image
 - response: 500
     - body: internal server error
 - response: 401
