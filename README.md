@@ -8,6 +8,9 @@
 ### Video Demo
 https://youtu.be/7SMk34Bqo0s
 
+### Api Documentation
+
+[Server Documentation](https://github.com/UTSCC09/project-spectvr/tree/master/doc)
 
 ### Team Members
 
